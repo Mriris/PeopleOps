@@ -45,15 +45,20 @@ export default {
   methods: {
     getDetailData () {
       // 调用后端接口， 把id作为参数传给后端，后端从数据库中取数据，然后返回给前端
-      this.detailData = {
-        bh: 'YG0001',
-        xm: '刘备',
-        xb: '男',
-        rzrq: '2021-01-01',
-        bm: '总经理办公室',
-        gw: '总经理',
-        csrq: '2000-01-02'
-      }
+      const formData = new FormData();
+      formData.append('id', this.id);
+      this.axios.post('/backend/ygDetail', formData).then(response => {
+        this.detailData = response.data;
+      });
+      // this.detailData = {
+      //   bh: 'YG0001',
+      //   xm: '刘备',
+      //   xb: '男',
+      //   rzrq: '2021-01-01',
+      //   bm: '总经理办公室',
+      //   gw: '总经理',
+      //   csrq: '2000-01-02'
+      // }
     },
     tableBack () {
       this.detailData = {};
