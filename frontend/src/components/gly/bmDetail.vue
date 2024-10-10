@@ -76,7 +76,7 @@ export default {
         type: 'success',
         confirmButtonText: '确定',
         callback: action => {
-          this.$router.push('/ygList');
+          this.$router.push('/bmList');
         }
       });
     },

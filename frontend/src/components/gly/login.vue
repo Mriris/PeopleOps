@@ -57,7 +57,7 @@ export default {
       this.$refs.form.validate((valid) => { // 执行校验，当通过校验时，valid值为true
         if (valid) {
           // 调用后端接口
-          if (this.loginData.zhm == 'admin' && this.loginData.mm == '123456') {
+          if (this.loginData.zhm == 'mua' && this.loginData.mm == '12345678') {
             // 用户名和密码正确
             this.$cookie.set('qx', 1); // 权限是1，表示管理员
             this.$cookie.set('gly_id', '123'); // 管理员id
