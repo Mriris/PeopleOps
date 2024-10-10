@@ -28,8 +28,6 @@ public class YgController {
         map1.put("gw", "总经理");
         map1.put("csrq", "2000-01-02");
 
-
-
         return map1;
     }
 

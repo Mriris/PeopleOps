@@ -8,12 +8,12 @@
     </div>
     <div class="detailPage">
       <el-descriptions :border="true" :column="1" :label-style="LS">
-        <el-descriptions-item label="编　　号">{{detailData.bh}}</el-descriptions-item>
-        <el-descriptions-item label="姓　　名">{{detailData.xm}}</el-descriptions-item>
-        <el-descriptions-item label="性　　别">{{detailData.xb}}</el-descriptions-item>
-        <el-descriptions-item label="入职日期">{{detailData.rzrq}}</el-descriptions-item>
-        <el-descriptions-item label="部　　门">{{detailData.bm}}</el-descriptions-item>
-        <el-descriptions-item label="岗　　位">{{detailData.gw}}</el-descriptions-item>
+        <el-descriptions-item label="编　　号">{{ detailData.bh }}</el-descriptions-item>
+        <el-descriptions-item label="姓　　名">{{ detailData.xm }}</el-descriptions-item>
+        <el-descriptions-item label="性　　别">{{ detailData.xb }}</el-descriptions-item>
+        <el-descriptions-item label="入职日期">{{ detailData.rzrq }}</el-descriptions-item>
+        <el-descriptions-item label="部　　门">{{ detailData.bm }}</el-descriptions-item>
+        <el-descriptions-item label="岗　　位">{{ detailData.gw }}</el-descriptions-item>
       </el-descriptions>
     </div>
   </div>
@@ -21,7 +21,7 @@
 <script>
 export default {
   name: 'ygDetail',
-  data () {
+  data() {
     return {
       id: null, // 定义id
       detailData: {
@@ -32,18 +32,18 @@ export default {
         bm: '', // 部门
         gw: '' // 岗位
       },
-      LS : {
+      LS: {
         'width': '130px',
         'text-align': 'center'
       }
     }
   },
-  mounted () {
+  mounted() {
     this.id = this.$route.params.id; // 获得上个页面传来的id的值
     this.getDetailData();
   },
   methods: {
-    getDetailData () {
+    getDetailData() {
       // 调用后端接口， 把id作为参数传给后端，后端从数据库中取数据，然后返回给前端
       const formData = new FormData();
       formData.append('id', this.id);
@@ -60,11 +60,11 @@ export default {
       //   csrq: '2000-01-02'
       // }
     },
-    tableBack () {
+    tableBack() {
       this.detailData = {};
       this.$router.push('/ygList');
     },
-    handleDelete () {
+    handleDelete() {
       this.$confirm('此操作将删除该员工, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -80,7 +80,7 @@ export default {
         }
       });
     },
-    handleSuccess () {
+    handleSuccess() {
       this.$alert('操作成功', '提示', {
         type: 'success',
         confirmButtonText: '确定',
@@ -89,7 +89,7 @@ export default {
         }
       });
     },
-    handleFailure () {
+    handleFailure() {
       this.$alert('操作失败', '提示', {
         type: 'error',
         confirmButtonText: '确定',
@@ -98,8 +98,8 @@ export default {
         }
       });
     },
-    handleUpdate () {
-      this.$router.push({ name: 'ygUpdate', params: { id: this.id } });
+    handleUpdate() {
+      this.$router.push({name: 'ygUpdate', params: {id: this.id}});
     }
   }
 };
