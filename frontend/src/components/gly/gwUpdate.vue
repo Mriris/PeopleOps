@@ -1,9 +1,9 @@
 ﻿<template>
-  <div class="bmUpdate">
+  <div class="gwUpdate">
     <div class="adminTitle">
-      <span>编辑部门</span>
+      <span>编辑岗位</span>
       <el-button size="mini" class="buildButton" @click="tableBack">返回</el-button>
-      <el-button size="mini" type="success" class="buildButton" @click="submit">提交</el-button>
+      <el-button size="mini" type="success" class="buildButton" @click="sugwit">提交</el-button>
     </div>
     <div class="detailPage">
       <el-form ref="form" label-position="left" label-width="130px" :model="detailData">
@@ -13,14 +13,10 @@
         <el-form-item label="名　　称">
           <el-input v-model="detailData.mc"></el-input>
         </el-form-item>
-        <el-form-item label="电　　话">
-          <el-input v-model="detailData.dh"></el-input>
-        </el-form-item>
-        <el-form-item label="传　　真">
-          <el-input v-model="detailData.cz"></el-input>
-        </el-form-item>
-        <el-form-item label="成立日期">
-          <el-date-picker v-model="detailData.clrq" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
+        <el-form-item label="岗位类型">
+          <el-select v-model="detailData.gwlx" placeholder="请选择">
+            <el-option v-for="item in gwlxList" :key="item.id" :label="item.mc" :value="item.id"></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
     </div>
@@ -28,49 +24,25 @@
 </template>
 <script>
 export default {
-  name: 'bmUpdate',
+  name: 'gwUpdate',
   data () {
     return {
       id: null,
       detailData: {
         bh: '', // 编号
         mc: '', // 名称
-        dh: '', // 电话
-        cz: '', // 传真
-        clrq: '', // 成立日期
+        gwlx: '', //岗位类型
       },
-      bmList: [{
-          id: 'b50fb65031644b36ab930928c2984f61',
-          mc: '总经理办公室'
+      gwlxList: [{
+          id: '1',
+          mc: '经理'
         }, {
-          id: '7b08eb003c474147a7d762ad5fb15246',
-          mc: '人事行政部'
+          id: '2',
+          mc: '主管'
         }, {
-          id: '880fc4a8a7374ce99ade9b0f38477bd6',
-          mc: '财务部'
-        }, {
-          id: '4150aa673b2c4c0abd23b337cb01b874',
-          mc: '法务部'
-        }, {
-          id: 'a1cb99d12dd34906ac2500f86b015b2b',
-          mc: '产品技术部'
-        }],
-      gwList: [{
-          id: 'e163b9964b154e7e94baa3743a7ca60f',
-          mc: '总经理'
-        }, {
-          id: 'afb5487739e6421a8ed4816837428dd1',
-          mc: '总经理助理'
-        }, {
-          id: '2a356d766c114505857a9351bb318ed3',
-          mc: '人事行政经理'
-        }, {
-          id: '323ff2f7164247288fe8e4955eb47c86',
-          mc: '人事主管'
-        }, {
-          id: '8f1797eec70d42b3b0781fd83905f3a6',
-          mc: '人事专员'
-        }]
+          id: '3',
+          mc: '专员'
+        }]   
     }
   },
   mounted () {
@@ -80,10 +52,10 @@ export default {
   methods: {
     getDetailData () {
       // 调用后端接口，查询员工详细信息
-      // this.detailData = {id:'2222cc4e882f4cf692a393890aeed28b',bh:'BM02',mc:'人事行政部',dh:'88880002',cz:'66660002',clrq:'2020-01-01'};
+      // this.detailData = {id:'2222cc4e882f4cf692a393890aeed28b',bh:'gw02',mc:'人事行政部',dh:'88880002',cz:'66660002',clrq:'2020-01-01'};
       const formData = new FormData();
       formData.append('id', this.id);
-      this.axios.post('/backend/bmDetail', formData).then(response => {
+      this.axios.post('/backend/gwDetail', formData).then(response => {
         this.detailData = response.data;
       });
     },
@@ -91,7 +63,7 @@ export default {
       this.detailData = {};
       this.$router.push({ name: 'ygDetail', params: { id: this.id } }); // 跳转到员工详细页面
     },
-    submit () {
+    sugwit () {
       // 调用后端接口，把数据提交到后端
       // 后端接口返回结果
       let res = 1;
@@ -130,7 +102,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.bmUpdate {
+.gwUpdate {
   width: 100%;
   height: 100%;
   background: #fff;

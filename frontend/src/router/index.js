@@ -16,6 +16,21 @@ import bmDetail from '@/components/gly/bmDetail'
 import bmBuild from '@/components/gly/bmBuild'
 import bmUpdate from '@/components/gly/bmUpdate'
 
+import gwList from '@/components/gly/gwList'
+import gwDetail from '@/components/gly/gwDetail'
+import gwBuild from '@/components/gly/gwBuild'
+import gwUpdate from '@/components/gly/gwUpdate'
+
+import syList from '@/components/gly/syList'
+import syDetail from '@/components/gly/syDetail'
+import syBuild from '@/components/gly/syBuild'
+import syUpdate from '@/components/gly/syUpdate'
+
+import lzList from '@/components/gly/lzList'
+import lzDetail from '@/components/gly/lzDetail'
+import lzBuild from '@/components/gly/lzBuild'
+import lzUpdate from '@/components/gly/lzUpdate'
+
 import changePassword from '@/components/gly/changePassword'
 
 Vue.use(Router);
@@ -90,6 +105,78 @@ export default new Router({
           path: '/bmUpdate',
           name: 'bmUpdate',
           component: bmUpdate,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/gwList',
+          name: 'gwList',
+          component: gwList,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/gwDetail',
+          name: 'gwDetail',
+          component: gwDetail,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/gwBuild',
+          name: 'gwBuild',
+          component: gwBuild,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/gwUpdate',
+          name: 'gwUpdate',
+          component: gwUpdate,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/syList',
+          name: 'syList',
+          component: syList,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/syDetail',
+          name: 'syDetail',
+          component: syDetail,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/syBuild',
+          name: 'syBuild',
+          component: syBuild,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/syUpdate',
+          name: 'syUpdate',
+          component: syUpdate,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/lzList',
+          name: 'lzList',
+          component: lzList,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/lzDetail',
+          name: 'lzDetail',
+          component: lzDetail,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/lzBuild',
+          name: 'lzBuild',
+          component: lzBuild,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/lzUpdate',
+          name: 'lzUpdate',
+          component: lzUpdate,
           meta: { auth: '1' }
         },
         {

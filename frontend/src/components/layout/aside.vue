@@ -11,13 +11,34 @@
       </el-menu-item-group>
     </el-submenu>
     <el-submenu index="2">
+      <template slot="title"><i class="el-icon-menu"></i>岗位管理</template>
+      <el-menu-item-group>
+        <el-menu-item index="/gwBuild">新建岗位</el-menu-item>
+        <el-menu-item index="/gwList">岗位列表</el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+    <el-submenu index="3">
       <template slot="title"><i class="el-icon-menu"></i>员工管理</template>
       <el-menu-item-group>
         <el-menu-item index="/ygBuild">新建员工</el-menu-item>
         <el-menu-item index="/ygList">员工列表</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
-    <el-submenu index="3">
+    <el-submenu index="4">
+      <template slot="title"><i class="el-icon-menu"></i>试用管理</template>
+      <el-menu-item-group>
+        <el-menu-item index="/syBuild">新建试用</el-menu-item>
+        <el-menu-item index="/syList">试用列表</el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+    <el-submenu index="5">
+      <template slot="title"><i class="el-icon-menu"></i>离职管理</template>
+      <el-menu-item-group>
+        <el-menu-item index="/lzBuild">新建离职</el-menu-item>
+        <el-menu-item index="/lzList">离职列表</el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+    <el-submenu index="6">
       <template slot="title"><i class="el-icon-s-tools"></i>账户管理</template>
       <el-menu-item-group>
         <el-menu-item index="/changePassword">修改密码</el-menu-item>

@@ -1,0 +1,107 @@
+﻿<template>
+  <div class="gwBuild">
+    <div class="adminTitle">
+      <span>新建岗位</span>
+      <el-button size="mini" class="buildButton" @click="tableBack">返回</el-button>
+      <el-button size="mini" type="success" class="buildButton" @click="sugwit">提交</el-button>
+    </div>
+    <div class="detailPage">
+      <el-form ref="form" label-position="left" label-width="130px" :model="detailData">
+        <el-form-item label="编　　号">
+          <el-input v-model="detailData.bh"></el-input>
+        </el-form-item>
+        <el-form-item label="名　　称">
+          <el-input v-model="detailData.mc"></el-input>
+        </el-form-item>
+        <el-form-item label="岗位类型">
+          <el-select v-model="detailData.gwlx" placeholder="请选择">
+            <el-option v-for="item in gwlxList" :key="item.id" :label="item.mc" :value="item.id"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: 'gwBuild',
+  data () {
+    return {
+      detailData: {
+        bh: '', // 编号
+        mc: '', // 名称
+        gwlx: '', //岗位类型
+      },
+      gwlxList: [{
+          id: '1',
+          mc: '经理'
+        }, {
+          id: '2',
+          mc: '主管'
+        }, {
+          id: '3',
+          mc: '专员'
+        }]      
+    }
+  },
+  methods: {
+    tableBack () {
+      this.detailData = {};
+      this.$router.push('/welcome');
+    },
+    sugwit () {
+      // 调用后端接口，把数据提交到后端
+      // 后端接口返回结果
+      let res = 1;
+      if (res == 1) {
+        this.handleSuccess();
+      } else if (res == -1) {
+        this.handleFailureBhExist();
+      } else {
+        this.handleFailure();
+      }
+    },
+    handleSuccess () {
+      this.$alert('操作成功', '提示', {
+        type: 'success',
+        confirmButtonText: '确定',
+        callback: action => {
+          this.$router.push('/gwList');
+        }
+      });
+    },
+    handleFailure () {
+      this.$alert('操作失败', '提示', {
+        type: 'error',
+        confirmButtonText: '确定',
+        callback: action => {}
+      });
+    },
+    handleFailureBhExist () {
+      this.$alert('该部门编号已经存在', '提示', {
+        type: 'error',
+        confirmButtonText: '确定',
+        callback: action => {}
+      });
+    }
+  }
+};
+</script>
+<style lang="less" scoped>
+.gwBuild {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  .tablePage {
+    .pageCss {
+      margin-top: 15px;
+    }
+  }
+  .detailPage {
+    .el-date-editor.el-input,
+    .el-date-editor.el-input__inner {
+      width: 100%;
+    }
+  }
+}
+</style>

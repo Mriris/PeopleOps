@@ -90,14 +90,19 @@ export default {
   methods: {
     getDetailData () {
       // 调用后端接口，查询员工详细信息
-      this.detailData = {
-        bh: 'YG0001',
-        xm: '刘备',
-        xb: '1',
-        rzrq: '2021-01-01',
-        bm: 'b50fb65031644b36ab930928c2984f61',
-        gw: 'afb5487739e6421a8ed4816837428dd1'
-      };
+      // this.detailData = {
+      //   bh: 'YG0001',
+      //   xm: '刘备',
+      //   xb: '1',
+      //   rzrq: '2021-01-01',
+      //   bm: 'b50fb65031644b36ab930928c2984f61',
+      //   gw: 'afb5487739e6421a8ed4816837428dd1'
+      // };
+      const formData = new FormData();
+      formData.append('id', this.id);
+      this.axios.post('/backend/ygDetail', formData).then(response => {
+        this.detailData = response.data;
+      });
     },
     tableBack () {
       this.detailData = {};
