@@ -140,3 +140,8 @@ WHERE yg.id = '24c599e7d1fb4dacaa85cf9003bb80f2'
   AND yg.gwid = gw.id
 ORDER BY yg.bh;
 
+
+# 查询离职员工的编号、姓名、性别
+# SELECT bh, xm, xb
+# FROM yg,lz
+# WHERE yg.id = lz.ygid AND lzlx = 1;
