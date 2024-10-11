@@ -1,3 +1,5 @@
-.idea
 /.idea/
-/支持/
+/frontend/node_modules/
+*.log
+*.tmp
+/backend/target/

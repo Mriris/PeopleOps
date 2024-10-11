@@ -1,0 +1,14 @@
+      const formData = new FormData();
+      formData.append('id', this.id);
+      this.axios.post('/backend/ygDetail', formData).then(response => {
+          this.detailData = response.data;
+      });
+
+
+      const formData = new FormData();
+      formData.append('page', this.currentPage);
+      formData.append('pageSize', this.pageSize);
+      this.axios.post('/backend/ygList', formData).then(response => {
+          this.total = response.data.total;
+          this.tableData = response.data.list;
+      });
