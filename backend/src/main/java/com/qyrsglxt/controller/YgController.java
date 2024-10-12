@@ -70,7 +70,11 @@ public class YgController {
         String id = IdUtil.getId();
         // 向数据库中存入数据
         Map<String, Object> map = new HashMap<String, Object>(); // 返回结果
-        Integer res = ygMapper.insertYg(id, bh, xm, xb, csrq, rzrq, bm, gw);
+        Integer res = -1;
+        Integer total = ygMapper.getYgTotalByBh(bh);
+        if (total == 0) {
+            res = ygMapper.insertYg(id, bh, xm, xb, csrq, rzrq, bm, gw);
+        }
         map.put("res", res);
         return map;
     }

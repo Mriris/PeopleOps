@@ -17,7 +17,8 @@ public interface YgMapper {
     public Map<String, Object> getYgBybh(@Param("bh") String bh);
     // 查询全部员工的数量
     public Integer getYgListTotal();
-
+    // 通过员工的编号查询员工的数量
+    public Integer getYgTotalByBh(@Param("bh") String bh);
     // 分页查询员工信息列表
     public List<Map<String, Object>> getYgListPage(
             @Param("start") Integer start, @Param("length") Integer length);

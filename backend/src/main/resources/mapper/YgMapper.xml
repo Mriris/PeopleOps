@@ -25,6 +25,10 @@
         where yg.bmid=bm.id and yg.gwid=gw.id and yg.bh=#{bh}
     </select>
 
+    <select id="getYgTotalByBh" resultType="int">
+        select count(1) from yg where bh=#{bh}
+    </select>
+
     <select id="getYgListTotal" resultType="int">
         select count(1) from yg
     </select>
