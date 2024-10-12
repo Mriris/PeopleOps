@@ -13,6 +13,8 @@ public interface YgMapper {
     // 通过员工id查询员工信息
     public Map<String, Object> getYgById(@Param("id") String id);
 
+    public Map<String, Object> getYgById2(@Param("id") String id);
+
     // 通过员工bh查询员工信息
     public Map<String, Object> getYgBybh(@Param("bh") String bh);
     // 查询全部员工的数量
@@ -38,7 +40,6 @@ public interface YgMapper {
                                        @Param("bm") String bm,
                                        @Param("gw") String gw);
 //    // 通过员工bh查询员工信息，用于员工编辑
-//    public Map<String, Object> getYgBybhForUpdate(@Param("bh") String bh);
     // 通过员工id删除员工信息
     public Integer deleteYgById(@Param("id") String id);
 

@@ -102,7 +102,7 @@ export default {
       // };
       const formData = new FormData();
       formData.append('id', this.id);
-      this.axios.post('/backend/ygDetail', formData).then(response => {
+      this.axios.post('/backend/ygDetail2', formData).then(response => {
         this.detailData = response.data;
       });
     },
@@ -117,7 +117,7 @@ export default {
       formData.append('bh', this.detailData.bh);
       formData.append('xm', this.detailData.xm);
       formData.append('xb', this.detailData.xb);
-      // formData.append('csrq', this.detailData.csrq);
+      formData.append('csrq', this.detailData.csrq);
       formData.append('rzrq', this.detailData.rzrq);
       formData.append('bm', this.detailData.bm);
       formData.append('gw', this.detailData.gw);

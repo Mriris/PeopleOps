@@ -29,6 +29,16 @@ public class YgController {
         return map;
     }
 
+    // 员工详细信息
+    // http://127.0.0.1:8083/backend/ygDetail?id=8bfd4bbdaf694cfd994605dd1854cf7b
+    @RequestMapping("/ygDetail2")
+    public Map<String, Object> ygDetail2(String id) {
+        System.out.println("前端传来的id为" + id);
+        // 从数据库中取数据
+        Map<String, Object> map = ygMapper.getYgById2(id); // 返回结果
+        return map;
+    }
+
     // http://127.0.0.1:8083/backend/ygDetailbh?bh=YG0005
     @RequestMapping("/ygDetailbh")
     public Map<String, Object> ygDetailbh(String bh) {

@@ -13,6 +13,18 @@
         where yg.bmid=bm.id and yg.gwid=gw.id and yg.id=#{id}
     </select>
 
+    <select id="getYgById2" resultType="map">
+        select
+            yg.bh as bh,
+            yg.xm as xm,
+            yg.xb as xb,
+            yg.rzrq as rzrq,
+            yg.bmid as bm,
+            yg.gwid as gw
+        from yg
+        where yg.id=#{id}
+    </select>
+
     <select id="getYgBybh" resultType="map">
         select
             yg.bh as bh,
@@ -52,18 +64,18 @@
         insert into yg(id, bh, xm, xb, csrq, rzrq, bmid, gwid, zzzt) values(#{id}, #{bh}, #{xm}, #{xb}, #{csrq}, #{rzrq}, #{bmid}, #{gwid}, '1')
     </insert>
 
-    <select id="getYgByIdForUpdate" resultType="map">
-        select
-            yg.bh as bh,
-            yg.xm as xm,
-            yg.xb as xb,
-            yg.csrq as csrq,
-            yg.rzrq as rzrq,
-            yg.bmid as bm,
-            yg.gwid as gw
-        from yg
-        where yg.id=#{id}
-    </select>
+<!--    <select id="getYgByIdForUpdate" resultType="map">-->
+<!--        select-->
+<!--            yg.bh as bh,-->
+<!--            yg.xm as xm,-->
+<!--            yg.xb as xb,-->
+<!--            yg.csrq as csrq,-->
+<!--            yg.rzrq as rzrq,-->
+<!--            yg.bmid as bm,-->
+<!--            yg.gwid as gw-->
+<!--        from yg-->
+<!--        where yg.id=#{id}-->
+<!--    </select>-->
     <update id="getYgByIdForUpdate2">
         update yg
         set bh=#{bh}, xm=#{xm}, xb=#{xb}, rzrq=#{rzrq},bmid=#{bm},gwid=#{gw}

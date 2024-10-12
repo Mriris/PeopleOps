@@ -42,20 +42,20 @@ export default {
   methods: {
     getDetailData() {
       // 调用后端接口， 把id作为参数传给后端，后端从数据库中取数据，然后返回给前端
-      // const formData = new FormData();
-      // formData.append('id', this.id);
-      // this.axios.post('/backend/syDetail', formData).then(response => {
-      //   this.detailData = response.data;
-      // });
-      this.detailData = {
-        bh: 'sy0001',
-        xm: '刘备',
-        xb: '男',
-        rzrq: '2021-01-01',
-        bm: '总经理办公室',
-        gw: '总经理',
-        csrq: '2000-01-02'
-      }
+      const formData = new FormData();
+      formData.append('id', this.id);
+      this.axios.post('/backend/syDetail', formData).then(response => {
+        this.detailData = response.data;
+      });
+      // this.detailData = {
+      //   bh: 'sy0001',
+      //   xm: '刘备',
+      //   xb: '男',
+      //   rzrq: '2021-01-01',
+      //   bm: '总经理办公室',
+      //   gw: '总经理',
+      //   csrq: '2000-01-02'
+      // }
     },
     tableBack() {
       this.detailData = {};
@@ -67,14 +67,27 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => { // 当点击确定时，执行下面
-        // 调用后端接口
-        // 后端接口返回结果
-        let res = 1;
-        if (res == 1) { // 表示删除了一条数据，也就是操作成功了
-          this.handleSuccess();
-        } else {
-          this.handleFailure();
-        }
+        const formData = new FormData();
+        formData.append('id', this.id);
+        this.axios.post(`/backend/syDelete`,formData).then(response => {
+          let res = response.data.res;
+          if (res == 1) {
+            this.handleSuccess();
+          } else {
+            this.handleFailure();
+          }
+        }).catch(error => {
+          console.error(error);
+          this.$message({
+            type: 'error',
+            message: '删除失败，请稍后重试'
+          });
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
       });
     },
     handleSuccess() {

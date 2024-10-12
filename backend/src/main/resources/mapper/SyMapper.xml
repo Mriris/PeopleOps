@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qyrsglxt.mapper.SyMapper">
+
+    <!-- 通过员工ID获取试用期信息，包含员工名字 -->
+    <select id="getSyById" resultType="map">
+        select
+        sy.id as id,
+        yg.bh as bh, <!-- 员工编号 -->
+        yg.xm as xm, <!-- 员工名字 -->
+        case zt when '1' then '正常'
+        when '2' then '结束'
+        when '3' then '延期'
+        when '4' then '不录用'
+        else '未知' end as zt,<!-- 试用期状态 -->
+        sy.ksrq as ksrq, <!-- 试用期开始日期 -->
+        sy.jsrq as jsrq  <!-- 试用期结束日期 -->
+        from sy
+        join yg on sy.ygid = yg.id  <!-- 关联员工表 -->
+        where sy.id = #{id}
+    </select>
+
+    <!-- 通过试用期ID获取试用期信息，包含员工名字 -->
+    <select id="getSyById2" resultType="map">
+        select
+        sy.id as id,
+        yg.bh as bh, <!-- 员工编号 -->
+        yg.xm as xm, <!-- 员工名字 -->
+        sy.zt as zt, <!-- 试用期状态 -->
+        sy.ksrq as ksrq, <!-- 试用期开始日期 -->
+        sy.jsrq as jsrq  <!-- 试用期结束日期 -->
+        from sy
+        join yg on sy.ygid = yg.id  <!-- 关联员工表 -->
+        where sy.id = #{id}
+    </select>
+
+    <!-- 查询试用期记录的总数量 -->
+    <select id="getSyTotal" resultType="int">
+        select count(1) from sy
+    </select>
+
+    <!-- 分页查询试用期信息，包含员工名字 -->
+    <select id="getSyListPage" resultType="map">
+        select
+        sy.id as id,
+        yg.bh as bh, <!-- 员工编号 -->
+        yg.xm as xm, <!-- 员工名字 -->
+        case zt when '1' then '正常'
+        when '2' then '结束'
+        when '3' then '延期'
+        when '4' then '不录用'
+        else '未知' end as zt, <!-- 试用期状态 -->
+        sy.ksrq as ksrq, <!-- 试用期开始日期 -->
+        sy.jsrq as jsrq  <!-- 试用期结束日期 -->
+        from sy
+        join yg on sy.ygid = yg.id  <!-- 关联员工表 -->
+        order by sy.ksrq desc
+        limit #{start}, #{length}
+    </select>
+
+    <!-- 插入试用期信息 -->
+    <insert id="insertSy">
+        insert into sy(id, ygid, zt, ksrq, jsrq)
+        values(#{id}, #{ygid}, #{zt}, #{ksrq}, #{jsrq})
+    </insert>
+
+    <!-- 更新试用期信息 -->
+    <update id="updateSyById">
+        update sy
+        set zt = #{zt}, ksrq = #{ksrq}, jsrq = #{jsrq}
+        where id = #{id}
+    </update>
+
+    <!-- 删除试用期信息 -->
+    <delete id="deleteSyById">
+        delete from sy where id = #{id}
+    </delete>
+
+</mapper>

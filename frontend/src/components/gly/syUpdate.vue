@@ -8,13 +8,13 @@
     <div class="detailPage">
       <el-form ref="form" label-position="left" label-width="130px" :model="detailData">
         <el-form-item label="员工编号">
-          <el-input v-model="detailData.bh"></el-input>
+          <el-input :disabled="true" v-model="detailData.bh"></el-input>
         </el-form-item>
         <el-form-item label="姓　　名">
-          <el-input v-model="detailData.xm"></el-input>
+          <el-input :disabled="true" v-model="detailData.xm"></el-input>
         </el-form-item>
         <el-form-item label="状　　态">
-          <el-select v-model="detailData.gw" placeholder="请选择">
+          <el-select v-model="detailData.zt" placeholder="请选择">
             <el-option v-for="item in ztList" :key="item.id" :label="item.mc" :value="item.id"/>
           </el-select>
         </el-form-item>
@@ -37,7 +37,7 @@ export default {
       detailData: {
         bh: '', // 编号
         xm: '', // 姓名
-        xt: '', // 状态
+        zt: '', // 状态
         ksrq: '', // 试用开始日期
         jsrq: '', // 试用结束日期
       },
@@ -46,10 +46,10 @@ export default {
           mc: '正常'
         }, {
           id: '2',
-          mc: '延期'
+          mc: '结束'
         }, {
           id: '3',
-          mc: '结束'
+          mc: '延期'
         }, {
           id: '4',
           mc: '不录用'
@@ -73,7 +73,7 @@ export default {
       // };
       const formData = new FormData();
       formData.append('id', this.id);
-      this.axios.post('/backend/syDetail', formData).then(response => {
+      this.axios.post('/backend/syDetail2', formData).then(response => {
         this.detailData = response.data;
       });
     },
@@ -82,16 +82,25 @@ export default {
       this.$router.push({ name: 'syDetail', params: { id: this.id } }); // 跳转到员工详细页面
     },
     submit () {
-      // 调用后端接口，把数据提交到后端
-      // 后端接口返回结果
-      let res = 1;
-      if (res == 1) {
-        this.handleSuccess();
-      } else if (res == -1) {
-        this.handleFailureBhExist();
-      } else {
-        this.handleFailure();
-      }
+      const formData = new FormData();
+      formData.append('id', this.id);
+      formData.append('bh', this.detailData.bh);
+      formData.append('xm', this.detailData.xm);
+      formData.append('zt', this.detailData.zt);
+      formData.append('ksrq', this.detailData.ksrq);
+      formData.append('jsrq', this.detailData.jsrq);
+      this.axios.post('/backend/syUpdate', formData).then(response => {
+        // this.detailData = response.data;
+        // 后端接口返回结果
+        let res = response.data.res;
+        if (res == 1) {
+          this.handleSuccess();
+        } else if (res == -1) {
+          this.handleFailureBhExist();
+        } else {
+          this.handleFailure();
+        }
+      });
     },
     handleSuccess () {
       this.$alert('操作成功', '提示', {

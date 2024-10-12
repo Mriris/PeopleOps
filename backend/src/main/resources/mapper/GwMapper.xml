@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qyrsglxt.mapper.GwMapper">
+
+    <!-- 通过岗位ID获取岗位信息 -->
+    <select id="getGwById" resultType="map">
+        select
+            gw.id as id,
+            gw.bh as bh,
+            gw.mc as mc,
+            case gw.lx when '1' then '经理'
+                       when '2' then '主管'
+                       when '3' then '专员'
+                       else '未知' end as gwlx
+        from gw
+        where gw.id=#{id}
+    </select>
+
+    <select id="getGwById2" resultType="map">
+        select
+            gw.id as id,
+            gw.bh as bh,
+            gw.mc as mc,
+            gw.lx as gwlx
+        from gw
+        where gw.id=#{id}
+    </select>
+
+    <!-- 通过岗位编号获取岗位信息 -->
+    <select id="getGwByBh" resultType="map">
+        select
+            gw.id as id,
+            gw.bh as bh,
+            gw.mc as mc,
+            case gw.lx when '1' then '经理'
+                       when '2' then '主管'
+                       when '3' then '专员'
+                       else '未知' end as gwlx
+        from gw
+        where gw.bh=#{bh}
+    </select>
+
+    <!-- 查询岗位记录的总数量 -->
+    <select id="getGwListTotal" resultType="int">
+        select count(1) from gw
+    </select>
+
+    <!-- 分页查询岗位信息 -->
+    <select id="getGwListPage" resultType="map">
+        select
+            gw.id as id,
+            gw.bh as bh,
+            gw.mc as mc,
+            case gw.lx when '1' then '经理'
+                       when '2' then '主管'
+                       when '3' then '专员'
+                       else '未知' end as gwlx
+        from gw
+        order by gw.bh
+            limit #{start}, #{length}
+    </select>
+
+    <!-- 插入岗位信息 -->
+    <insert id="insertGw">
+        insert into gw(id, bh, mc, lx)
+        values(#{id}, #{bh}, #{mc}, #{gwlx})
+    </insert>
+
+    <!-- 更新岗位信息 -->
+    <update id="updateGwById">
+        update gw
+        set mc = #{mc}, lx = #{gwlx}
+        where id = #{id}
+    </update>
+
+    <!-- 删除岗位信息 -->
+    <delete id="deleteGwById">
+        delete from gw where id = #{id}
+    </delete>
+
+</mapper>

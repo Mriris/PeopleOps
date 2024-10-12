@@ -5,11 +5,11 @@
     </div>
     <div class="tablePage">
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="bh" label="编号" align="center" width="100"></el-table-column>
-        <el-table-column prop="mc" label="名称" align="center" width="100"></el-table-column>
-        <el-table-column prop="dh" label="电话" align="center" width="100"></el-table-column>
-        <el-table-column prop="cz" label="传真" align="center" width="100"></el-table-column>
-        <el-table-column prop="clrq" label="成立日期" align="center" width="200"></el-table-column>
+        <el-table-column prop="bh" label="编号" align="center" ></el-table-column>
+        <el-table-column prop="mc" label="名称" align="center" ></el-table-column>
+        <el-table-column prop="dh" label="电话" align="center" ></el-table-column>
+        <el-table-column prop="cz" label="传真" align="center" ></el-table-column>
+        <el-table-column prop="clrq" label="成立日期" align="center" ></el-table-column>
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
             <el-button size="mini" @click="handleView(scope.row.id)">查看</el-button>

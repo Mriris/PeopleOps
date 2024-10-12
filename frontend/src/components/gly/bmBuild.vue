@@ -80,7 +80,8 @@ export default {
     submit () {
       // 调用后端接口，把数据提交到后端
       // 后端接口返回结果
-      let res = 1;
+
+      // let res = 1;
       if (res == 1) {
         this.handleSuccess();
       } else if (res == -1) {

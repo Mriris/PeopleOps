@@ -2,4 +2,71 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qyrsglxt.mapper.BmMapper">
 
+    <!-- 查询部门信息根据ID -->
+    <select id="getBmById" resultType="map">
+        select
+            id as id,
+            bh as bh,
+            mc as mc,
+            dh as dh,
+            cz as cz,
+            clrq as clrq
+        from bm
+        where id = #{id}
+    </select>
+
+    <!-- 查询部门信息根据编号 -->
+    <select id="getBmByBh" resultType="map">
+        select
+            id as id,
+            bh as bh,
+            mc as mc,
+            dh as dh,
+            cz as cz,
+            clrq as clrq
+        from bm
+        where bh = #{bh}
+    </select>
+
+    <!-- 获取部门总数 -->
+    <select id="getBmListTotal" resultType="int">
+        select count(1) from bm
+    </select>
+
+    <!-- 分页查询部门列表 -->
+    <select id="getBmListPage" resultType="map">
+        select
+            id as id,
+            bh as bh,
+            mc as mc,
+            dh as dh,
+            cz as cz,
+            clrq as clrq
+        from bm
+        order by bh limit #{start}, #{length}
+    </select>
+
+    <!-- 插入部门信息 -->
+    <insert id="insertBm">
+        insert into bm(id, bh, mc, dh, cz, clrq)
+        values(#{id}, #{bh}, #{mc}, #{dh}, #{cz}, #{clrq})
+    </insert>
+
+    <!-- 更新部门信息 -->
+    <update id="updateBmById">
+        update bm
+        set
+            bh = #{bh},
+            mc = #{mc},
+            dh = #{dh},
+            cz = #{cz},
+            clrq = #{clrq}
+        where id = #{id}
+    </update>
+
+    <!-- 删除部门信息 -->
+    <delete id="deleteBmById">
+        delete from bm where id = #{id}
+    </delete>
+
 </mapper>

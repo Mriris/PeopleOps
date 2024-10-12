@@ -54,7 +54,7 @@ export default {
     },
     tableBack () {
       this.detailData = {};
-      this.$router.push('/ygList');
+      this.$router.push('/gwList');
     },
     handleDelete () {
       this.$confirm('此操作将删除该部门, 是否继续?', '提示', {
@@ -62,14 +62,27 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => { // 当点击确定时，执行下面
-        // 调用后端接口
-        // 后端接口返回结果
-        let res = 1;
-        if (res == 1) { // 表示删除了一条数据，也就是操作成功了
-          this.handleSuccess();
-        } else {
-          this.handleFailure();
-        }
+        const formData = new FormData();
+        formData.append('id', this.id);
+        this.axios.post(`/backend/gwDelete`,formData).then(response => {
+          let res = response.data.res;
+          if (res == 1) {
+            this.handleSuccess();
+          } else {
+            this.handleFailure();
+          }
+        }).catch(error => {
+          console.error(error);
+          this.$message({
+            type: 'error',
+            message: '删除失败，请稍后重试'
+          });
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
       });
     },
     handleSuccess () {
