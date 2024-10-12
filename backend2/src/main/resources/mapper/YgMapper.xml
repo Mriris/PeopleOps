@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qyrsglxt.mapper.YgMapper">
+    <select id="getYgById" resultType="map">
+        select
+            yg.bh as bh,
+            yg.xm as xm,
+            case yg.xb when '1' then  '男' else '女' end as xb,
+            yg.rzrq as rzrq,
+            bm.mc as bm,
+            gw.mc as gw
+        from yg, bm, gw
+        where yg.bmid=bm.id and yg.gwid=gw.id and yg.id=#{id}
+    </select>
+
+    <select id="getYgListTotal" resultType="int">
+        select count(1) from yg
+    </select>
+
+    <select id="getYgListPage" resultType="map">
+        select
+            yg.id as id,
+            yg.bh as bh,
+            yg.xm as xm,
+            case yg.xb when '1' then  '男' else '女' end as xb,
+            yg.csrq as csrq,
+            yg.rzrq as rzrq,
+            bm.mc as bm,
+            gw.mc as gw
+        from yg, bm, gw
+        where yg.bmid=bm.id and yg.gwid=gw.id
+        order by bh limit #{start}, #{length}
+    </select>
+
+    <insert id="insertYg">
+        insert into yg(id, bh, xm, xb, csrq, rzrq, bmid, gwid, zzzt) values(#{id}, #{bh}, #{xm}, #{xb}, #{csrq}, #{rzrq}, #{bmid}, #{gwid}, '1')
+    </insert>
+
+    <delete id="deleteYgById">
+        delete from yg where id=#{id}
+    </delete>
+
+</mapper>
