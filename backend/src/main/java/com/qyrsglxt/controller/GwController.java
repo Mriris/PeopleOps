@@ -46,7 +46,7 @@ public class GwController {
         return map;
     }
 
-    // 岗位列表
+    // 岗位
     // http://127.0.0.1:8083/backend/gwList?page=1&pageSize=5
     @RequestMapping("/gwList")
     public Map<String, Object> gwList(Integer page, Integer pageSize) {
