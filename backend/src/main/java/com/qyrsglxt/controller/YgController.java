@@ -37,7 +37,6 @@ public class YgController {
         Map<String, Object> map = ygMapper.getYgBybh(bh); // 返回结果
         return map;
     }
-
     // 员工列表
     // http://127.0.0.1:8083/backend/ygList?page=1&pageSize=5
     @RequestMapping("/ygList")
