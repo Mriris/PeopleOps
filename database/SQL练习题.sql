@@ -135,7 +135,7 @@ SELECT yg.bh, yg.xm, yg.xb, bm.mc, gw.mc
 FROM yg,
      bm,
      gw
-WHERE yg.id = 'F4'
+WHERE yg.id = 'F5'
   AND yg.bmid = bm.id
   AND yg.gwid = gw.id
 ORDER BY yg.bh;
