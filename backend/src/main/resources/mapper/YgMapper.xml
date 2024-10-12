@@ -64,7 +64,7 @@
         from yg
         where yg.id=#{id}
     </select>
-    <update id="getYgByIdForUpdate2">
+    <update id="setYgByIdForUpdate">
         update yg
         set bh=#{bh}, xm=#{xm}, xb=#{xb}, rzrq=#{rzrq},bmid=#{bm},gwid=#{gw}
         where id = #{id};

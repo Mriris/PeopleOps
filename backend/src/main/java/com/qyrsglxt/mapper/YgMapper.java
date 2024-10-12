@@ -30,7 +30,7 @@ public interface YgMapper {
                             @Param("bmid") String bmid, @Param("gwid") String gwid);
     // 通过员工id查询员工信息，用于员工编辑
     public Map<String, Object> getYgByIdForUpdate(@Param("id") String id);
-    public Integer getYgByIdForUpdate2(@Param("id") String id,
+    public Integer setYgByIdForUpdate(@Param("id") String id,
                                        @Param("bh") String bh,
                                        @Param("xm") String xm,
                                        @Param("xb") String xb,

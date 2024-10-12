@@ -42,7 +42,6 @@ export default {
     return {
       id: null,
       detailData: {
-        // id: '', // 编号
         bh: '', // 编号
         xm: '', // 姓名
         xb: '', // 性别
@@ -102,7 +101,7 @@ export default {
       // };
       const formData = new FormData();
       formData.append('id', this.id);
-      this.axios.post('/backend/ygDetail', formData).then(response => {
+      this.axios.post('/backend/ygDetailForUpdate', formData).then(response => {
         this.detailData = response.data;
       });
     },
