@@ -17,6 +17,9 @@
           <el-radio v-model="detailData.xb" label="1">男</el-radio>
           <el-radio v-model="detailData.xb" label="2">女</el-radio>
         </el-form-item>
+        <el-form-item label="出生日期">
+          <el-date-picker v-model="detailData.csrq" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
+        </el-form-item>
         <el-form-item label="入职日期">
           <el-date-picker v-model="detailData.rzrq" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
         </el-form-item>
@@ -43,7 +46,8 @@ export default {
         bh: '', // 编号
         xm: '', // 姓名
         xb: '', // 性别
-        rzrq: '', // 入职日期
+        rzrq: '', // 入职日期,
+        csrq:'',//出生日期
         bm: '', // 部门
         gw: '' // 岗位
       },
