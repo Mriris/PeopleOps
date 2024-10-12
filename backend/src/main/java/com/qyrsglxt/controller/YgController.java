@@ -103,6 +103,8 @@ public class YgController {
         System.out.println("前端传来的gw为" + gw);
         // 向数据库中更新数据
         Map<String, Object> map = new HashMap<String, Object>(); // 返回结果
+
+        ygMapper.getYgByIdForUpdate2(id,xm); // 返回结果;
         Integer res = 1;
         map.put("res", res);
         return map;

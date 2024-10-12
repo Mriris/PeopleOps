@@ -64,7 +64,11 @@
         from yg
         where yg.id=#{id}
     </select>
-
+    <update id="getYgByIdForUpdate2">
+        update yg
+        set xm=#{xm}
+        where id = #{id};
+    </update>
     <delete id="deleteYgById">
         delete from yg where id=#{id}
     </delete>

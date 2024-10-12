@@ -114,7 +114,7 @@ export default {
       // 调用后端接口，把数据提交到后端
       const formData = new FormData();
       formData.append('id', this.id);
-      formData.append('bm', this.detailData.bm);
+      formData.append('xm', this.detailData.xm);
       formData.append('xb', this.detailData.xb);
       // formData.append('csrq', this.detailData.csrq);
       formData.append('rzrq', this.detailData.rzrq);
