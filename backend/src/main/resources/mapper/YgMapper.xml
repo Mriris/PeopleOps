@@ -13,6 +13,18 @@
         where yg.bmid=bm.id and yg.gwid=gw.id and yg.id=#{id}
     </select>
 
+    <select id="getYgBybh" resultType="map">
+        select
+            yg.bh as bh,
+            yg.xm as xm,
+            case yg.xb when '1' then  '男' else '女' end as xb,
+            yg.rzrq as rzrq,
+            bm.mc as bm,
+            gw.mc as gw
+        from yg, bm, gw
+        where yg.bmid=bm.id and yg.gwid=gw.id and yg.bh=#{bh}
+    </select>
+
     <select id="getYgListTotal" resultType="int">
         select count(1) from yg
     </select>
