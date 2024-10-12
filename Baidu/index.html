@@ -21,27 +21,67 @@
           <a href="#">更多</a>
           
         </ul>
-        <ul style="margin-left: auto;float: none;">
-          <!-- <a href="#" style="text-align: end;margin-right: 20px;">设置</a> -->
-          <div style="
-            z-index:100;/*层叠*/
-            padding-right:2px;
-            float:right;">  
-              <div id="more_li">
-              <span  style="display:inline-block;  vertical-align:top;  cursor:pointer;"><a href="">设置</a></span>
-              <div id="more_menu">             
-                  <ul style="padding-left: 12px; padding-right: 12px;">
-                      <li><a href="">搜索设置</a></li>
-                      <li><a href="">高级搜索</a></li>
-                      <li><a href="">关闭预测</a></li>
-                      <li><a href="">隐私设置</a></li>
-                      <li><a href="">关闭热搜</a></li>
-                  </ul>
+          <ul style="margin-left: auto; float: none;">
+              <div style="
+    z-index: 100; /*层叠*/
+    padding-right: 2px;
+    float: right;">
+                  <div id="more_li" style="position: relative;">
+      <span style="display: inline-block; vertical-align: top; cursor: pointer;">
+        <a href="#">设置</a>
+      </span>
+                      <div id="more_menu" style="
+        display: none;
+        position: absolute;
+        top: 100%; /* 确保菜单紧跟在按钮下方 */
+        left: 0;
+        z-index: 200; /* 确保菜单显示在其他元素上 */
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
+                          <ul style="padding-left: 12px; padding-right: 12px; margin: 0;">
+                              <li><a href="#">搜索设置</a></li>
+                              <li><a href="#">高级搜索</a></li>
+                              <li><a href="#">关闭预测</a></li>
+                              <li><a href="#">隐私设置</a></li>
+                              <li><a href="#">关闭热搜</a></li>
+                          </ul>
+                      </div>
+                  </div>
               </div>
-            </div>
-          </div>
-        </ul>
-        <div style="height: fit-content;">
+          </ul>
+
+          <script>
+              let timeoutID;
+
+              // 当鼠标悬停在more_li上时显示菜单
+              document.getElementById("more_li").addEventListener("mouseenter", function() {
+                  clearTimeout(timeoutID);  // 清除可能的隐藏菜单定时器
+                  document.getElementById("more_menu").style.display = "block";
+              });
+
+              // 当鼠标离开more_li时延迟隐藏菜单
+              document.getElementById("more_li").addEventListener("mouseleave", function() {
+                  timeoutID = setTimeout(function() {
+                      document.getElementById("more_menu").style.display = "none";
+                  }, 300);  // 设置300ms的延迟
+              });
+
+              // 当鼠标悬停在菜单上时取消隐藏
+              document.getElementById("more_menu").addEventListener("mouseenter", function() {
+                  clearTimeout(timeoutID);  // 清除隐藏菜单的定时器
+                  document.getElementById("more_menu").style.display = "block";
+              });
+
+              // 当鼠标离开菜单时延迟隐藏菜单
+              document.getElementById("more_menu").addEventListener("mouseleave", function() {
+                  timeoutID = setTimeout(function() {
+                      document.getElementById("more_menu").style.display = "none";
+                  }, 300);  // 设置300ms的延迟
+              });
+          </script>
+
+          <div style="height: fit-content;">
           <button class="login-button" style="display: flex;">登录</button>
         </div>
         
