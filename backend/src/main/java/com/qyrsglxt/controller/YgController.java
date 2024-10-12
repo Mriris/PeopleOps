@@ -4,8 +4,7 @@ import com.qyrsglxt.mapper.YgMapper;
 import com.qyrsglxt.util.IdUtil;
 import com.qyrsglxt.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,25 +69,42 @@ public class YgController {
     // 新建员工
     // http://127.0.0.1:8083/backend/ygBuild?bh=YG0009&xm=诸葛亮&xb=1&csrq=2000-01-01&rzrq=2021-01-01&bm=123&gw=456
     @RequestMapping("/ygBuild")
-    public Map<String, Object> ygBuild(String bh, String xm, String xb, String csrq, String rzrq, String bm, String gw) {
-        System.out.println("前端传来的bh为" + bh);
-        System.out.println("前端传来的xm为" + xm);
-        System.out.println("前端传来的xb为" + xb);
-        System.out.println("前端传来的csrq为" + csrq);
-        System.out.println("前端传来的rzrq为" + rzrq);
-        System.out.println("前端传来的bm为" + bm);
-        System.out.println("前端传来的gw为" + gw);
-        String id = IdUtil.getId();
-        // 向数据库中存入数据
-        Map<String, Object> map = new HashMap<String, Object>(); // 返回结果
+    @ResponseBody
+    public Map<String, Object> ygBuild(String bh,String xm,String xb,String csrq, String rzrq,String bm,String gw) {
+/*        String bh = (String) data.get("bh");
+        String xm = (String) data.get("xm");
+        String xb = (String) data.get("xb");
+        String csrq = (String) data.get("csrq");
+        String rzrq = (String) data.get("rzrq");
+        String bm = (String) data.get("bm");  // 部门ID
+        String gw = (String) data.get("gw");  // 岗位ID*/
+
+        // 打印接收到的内容，确保正确解析
+        System.out.println("前端传来的bh为: " + bh);
+        System.out.println("前端传来的xm为: " + xm);
+        System.out.println("前端传来的xb为: " + xb);
+        System.out.println("前端传来的csrq为: " + csrq);
+        System.out.println("前端传来的rzrq为: " + rzrq);
+        System.out.println("前端传来的bm为: " + bm);
+        System.out.println("前端传来的gw为: " + gw);
+
+        String id = IdUtil.getId();  // 生成唯一ID
+
+        // 返回结果
+        Map<String, Object> map = new HashMap<>();
         Integer res = -1;
+
+        // 检查编号是否存在
         Integer total = ygMapper.getYgTotalByBh(bh);
         if (total == 0) {
+            // 插入数据
             res = ygMapper.insertYg(id, bh, xm, xb, csrq, rzrq, bm, gw);
         }
+
         map.put("res", res);
         return map;
     }
+
 
     // 编辑员工页面的员工详细信息
     // http://127.0.0.1:8083/backend/ygDetailForUpdate?id=f62012e4abde4efc97518129eafee547

@@ -38,6 +38,8 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   name: 'ygBuild',
   data () {
@@ -91,16 +93,46 @@ export default {
       this.$router.push('/welcome');
     },
     submit () {
+
       // 调用后端接口，把数据提交到后端
+
+      // 打印调试，确认选择的部门和岗位的 ID 值
+      console.log("提交数据:", this.detailData);
+
+      // 直接将 detailData 传递给后端
+      const formData = new FormData();
+      formData.append('id', this.id);
+      formData.append('bh', this.detailData.bh);
+      formData.append('xm', this.detailData.xm);
+      formData.append('xb', this.detailData.xb);
+      formData.append('csrq', this.detailData.csrq);
+      formData.append('rzrq', this.detailData.rzrq);
+      formData.append('bm', this.detailData.bm);
+      formData.append('gw', this.detailData.gw);
+      this.axios.post("backend/ygBuild",formData)
+        .then(response => {
+          console.log("响应结果:", response.data);  // 打印后端返回的数据
+          if (response.data.res === 1) {  // 判断是否成功
+            this.handleSuccess();
+          } else if (response.data.res === -1) {
+            this.handleFailureBhExist();
+          } else {
+            this.handleFailure();
+          }
+        })
+        .catch(error => {
+          console.error("请求失败:", error);
+        });
+
       // 后端接口返回结果
-      let res = 1;
+      /*let res = 1;
       if (res == 1) {
         this.handleSuccess();
       } else if (res == -1) {
         this.handleFailureBhExist();
       } else {
         this.handleFailure();
-      }
+      }*/
     },
     handleSuccess () {
       this.$alert('操作成功', '提示', {
