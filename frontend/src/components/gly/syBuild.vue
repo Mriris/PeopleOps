@@ -11,7 +11,7 @@
           <el-input v-model="detailData.bh"/>
         </el-form-item>
         <el-form-item label="状　　态">
-          <el-select v-model="detailData.gw" placeholder="请选择">
+          <el-select v-model="detailData.zt" placeholder="请选择">
             <el-option v-for="item in ztList" :key="item.id" :label="item.mc" :value="item.id"/>
           </el-select>
         </el-form-item>
@@ -32,7 +32,7 @@ export default {
     return {
       detailData: {
         bh: '', // 编号
-        xt: '', // 状态
+        zt: '', // 状态
         ksrq: '', // 试用开始日期
         jsrq: '', // 试用结束日期
       },
@@ -57,17 +57,25 @@ export default {
       this.$router.push('/welcome');
     },
     submit () {
-      // 调用后端接口，把数据提交到后端
-      // 后端接口返回结果
-      
-      let res = 1;
-      if (res == 1) {
-        this.handleSuccess();
-      } else if (res == -1) {
-        this.handleFailureBhExist();
-      } else {
-        this.handleFailure();
-      }
+      const formData = new FormData();
+      // formData.append('id', this.id);
+      formData.append('bh', this.detailData.bh);
+      // formData.append('xm', this.detailData.xm);
+      formData.append('zt', this.detailData.zt);
+      formData.append('ksrq', this.detailData.ksrq);
+      formData.append('jsrq', this.detailData.jsrq);
+      this.axios.post('/backend/syBuild', formData).then(response => {
+        // this.detailData = response.data;
+        // 后端接口返回结果
+        let res = response.data.res;
+        if (res == 1) {
+          this.handleSuccess();
+        } else if (res == -1) {
+          this.handleFailureBhExist();
+        } else {
+          this.handleFailure();
+        }
+      });
     },
     handleSuccess () {
       this.$alert('操作成功', '提示', {

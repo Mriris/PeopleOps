@@ -66,7 +66,7 @@ public class GwController {
     }
 
     // 新建岗位
-    // http://127.0.0.1:8083/backend/gwBuild?bh=GW002&mc=市场专员&lx=3
+    // http://127.0.0.1:8083/backend/gwBuild?bh=GW002&mc='市场专员'&lx=3
     @RequestMapping("/gwBuild")
     public Map<String, Object> gwBuild(String bh, String mc, String gwlx) {
         System.out.println("前端传来的bh为" + bh);

@@ -64,6 +64,7 @@ public class LzController {
         return map;
     }
 
+
     // 插入离职信息
     // http://127.0.0.1:8083/backend/lzInsert?ygid=123&lzrq=2024-05-01&lzlx=1
     @RequestMapping("/lzInsert")

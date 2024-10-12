@@ -61,7 +61,7 @@
     <!-- 插入试用期信息 -->
     <insert id="insertSy">
         insert into sy(id, ygid, zt, ksrq, jsrq)
-        values(#{id}, #{ygid}, #{zt}, #{ksrq}, #{jsrq})
+        values(#{id}, #{bh}, #{zt}, #{ksrq}, #{jsrq})
     </insert>
 
     <!-- 更新试用期信息 -->

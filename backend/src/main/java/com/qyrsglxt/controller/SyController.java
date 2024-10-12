@@ -70,17 +70,17 @@ public class SyController {
     }
 
     // 新建试用期员工记录
-    // http://127.0.0.1:8083/backend/syBuild?ygid=123&zt=1&ksrq=2024-01-01&jsrq=2024-04-01
+    // http://127.0.0.1:8083/backend/syBuild?bh=123&zt=1&ksrq=2024-01-01&jsrq=2024-04-01
     @RequestMapping("/syBuild")
-    public Map<String, Object> syBuild(String ygid, String zt, String ksrq, String jsrq) {
-        System.out.println("前端传来的ygid为" + ygid);
+    public Map<String, Object> syBuild(String bh, String zt, String ksrq, String jsrq) {
+        System.out.println("前端传来的ygid为" + bh);
         System.out.println("前端传来的zt为" + zt);
         System.out.println("前端传来的ksrq为" + ksrq);
         System.out.println("前端传来的jsrq为" + jsrq);
         String id = IdUtil.getId();
         // 向数据库中存入数据
         Map<String, Object> map = new HashMap<>();
-        Integer res = syMapper.insertSy(id, ygid, zt, ksrq, jsrq);
+        Integer res = syMapper.insertSy(id, bh, zt, ksrq, jsrq);
         map.put("res", res);
         return map;
     }
