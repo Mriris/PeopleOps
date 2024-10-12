@@ -107,13 +107,14 @@ export default {
       });
     },
     tableBack () {
-      this.detailData = {};
+      // this.detailData = {};
       this.$router.push({ name: 'ygDetail', params: { id: this.id } }); // 跳转到员工详细页面
     },
     submit () {
       // 调用后端接口，把数据提交到后端
       const formData = new FormData();
       formData.append('id', this.id);
+      formData.append('bh', this.detailData.bh);
       formData.append('xm', this.detailData.xm);
       formData.append('xb', this.detailData.xb);
       // formData.append('csrq', this.detailData.csrq);

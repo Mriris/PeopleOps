@@ -61,7 +61,7 @@ export default {
       // }
     },
     tableBack() {
-      this.detailData = {};
+      // this.detailData = {};
       this.$router.push('/ygList');
     },
     handleDelete() {

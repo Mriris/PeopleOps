@@ -37,6 +37,7 @@ public class YgController {
         Map<String, Object> map = ygMapper.getYgBybh(bh); // 返回结果
         return map;
     }
+
     // 员工列表
     // http://127.0.0.1:8083/backend/ygList?page=1&pageSize=5
     @RequestMapping("/ygList")
@@ -92,20 +93,20 @@ public class YgController {
     // 编辑员工
     // http://127.0.0.1:8083/backend/ygUpdate?id=8bfd4bbdaf694cfd994605dd1854cf7b&bh=YG0009&xm=诸葛亮&xb=1&csrq=2000-01-01&rzrq=2021-01-01&bm=123&gw=456
     @RequestMapping("/ygUpdate")
-    public Map<String, Object> ygUpdate(String id, String bh, String xm, String xb, String csrq, String rzrq, String bm, String gw) {
+    public Map<String, Object> ygUpdate(String id, String bh, String xm, String xb, String rzrq, String bm, String gw) {
         System.out.println("前端传来的id为" + id);
         System.out.println("前端传来的bh为" + bh);
         System.out.println("前端传来的xm为" + xm);
         System.out.println("前端传来的xb为" + xb);
-        System.out.println("前端传来的csrq为" + csrq);
+//        System.out.println("前端传来的csrq为" + csrq);
         System.out.println("前端传来的rzrq为" + rzrq);
         System.out.println("前端传来的bm为" + bm);
         System.out.println("前端传来的gw为" + gw);
         // 向数据库中更新数据
         Map<String, Object> map = new HashMap<String, Object>(); // 返回结果
 
-        ygMapper.getYgByIdForUpdate2(id,xm); // 返回结果;
-        Integer res = 1;
+        Integer res = ygMapper.getYgByIdForUpdate2(id, bh, xm, xb, rzrq, bm, gw); // 返回结果;
+//        Integer res = 1;
         map.put("res", res);
         return map;
     }
