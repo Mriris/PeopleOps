@@ -80,15 +80,12 @@ public class YgController {
     }
 
     // 编辑员工页面的员工详细信息
-    // http://127.0.0.1:8083/backend/ygDetailForUpdate?id=123
+    // http://127.0.0.1:8083/backend/ygDetailForUpdate?id=f62012e4abde4efc97518129eafee547
     @RequestMapping("/ygDetailForUpdate")
     public Map<String, Object> ygDetailForUpdate(String id) {
         System.out.println("前端传来的id为" + id);
         // 从数据库中取数据
-        Map<String, Object> map = new HashMap<String, Object>(); // 返回结果
-        map.put("bh", "YG0001");
-        map.put("xm", "刘备");
-        map.put("xb", "1");
+        Map<String, Object> map = ygMapper.getYgByIdForUpdate(id); // 返回结果;
         return map;
     }
 

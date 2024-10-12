@@ -42,9 +42,11 @@ export default {
     return {
       id: null,
       detailData: {
+        // id: '', // 编号
         bh: '', // 编号
         xm: '', // 姓名
         xb: '', // 性别
+        csrq: '', // 入职日期
         rzrq: '', // 入职日期
         bm: '', // 部门
         gw: '' // 岗位
@@ -110,15 +112,27 @@ export default {
     },
     submit () {
       // 调用后端接口，把数据提交到后端
-      // 后端接口返回结果
-      let res = 1;
-      if (res == 1) {
-        this.handleSuccess();
-      } else if (res == -1) {
-        this.handleFailureBhExist();
-      } else {
-        this.handleFailure();
-      }
+      const formData = new FormData();
+      formData.append('id', this.id);
+      formData.append('bm', this.detailData.bm);
+      formData.append('xb', this.detailData.xb);
+      // formData.append('csrq', this.detailData.csrq);
+      formData.append('rzrq', this.detailData.rzrq);
+      formData.append('bm', this.detailData.bm);
+      formData.append('gw', this.detailData.gw);
+      this.axios.post('/backend/ygUpdate', formData).then(response => {
+        // this.detailData = response.data;
+        // 后端接口返回结果
+        let res = response.data.res;
+        if (res == 1) {
+          this.handleSuccess();
+        } else if (res == -1) {
+          this.handleFailureBhExist();
+        } else {
+          this.handleFailure();
+        }
+      });
+
     },
     handleSuccess () {
       this.$alert('操作成功', '提示', {

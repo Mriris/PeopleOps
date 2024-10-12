@@ -28,7 +28,10 @@ public interface YgMapper {
                             @Param("xm") String xm, @Param("xb") String xb,
                             @Param("csrq") String csrq, @Param("rzrq") String rzrq,
                             @Param("bmid") String bmid, @Param("gwid") String gwid);
-
+    // 通过员工id查询员工信息，用于员工编辑
+    public Map<String, Object> getYgByIdForUpdate(@Param("id") String id);
+//    // 通过员工bh查询员工信息，用于员工编辑
+//    public Map<String, Object> getYgBybhForUpdate(@Param("bh") String bh);
     // 通过员工id删除员工信息
     public Integer deleteYgById(@Param("id") String id);
 
