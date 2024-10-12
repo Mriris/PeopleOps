@@ -115,7 +115,7 @@ public class YgController {
         // 向数据库中更新数据
         Map<String, Object> map = new HashMap<String, Object>(); // 返回结果
 
-        Integer res = ygMapper.setYgByIdForUpdate(id, bh, xm, xb, rzrq, bm, gw); // 返回结果;
+        Integer res = ygMapper.getYgByIdForUpdate2(id, bh, xm, xb, rzrq, bm, gw); // 返回结果;
 //        Integer res = 1;
         map.put("res", res);
         return map;
