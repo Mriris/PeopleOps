@@ -81,6 +81,8 @@ public class LzController {
         Map<String, Object> map = new HashMap<>();
 
         if (ygInfo == null || ygInfo.get("id") == null) {
+            System.out.println(ygInfo);
+            System.out.println('1');
             map.put("res", 0); // 员工不存在
             map.put("message", "员工编号不存在");
             return map;

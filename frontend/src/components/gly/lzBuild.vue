@@ -75,16 +75,16 @@ export default {
           } else if (res == -1) {
             this.handleFailureBhExist();
           }else if (res == 0){
-            this.alert(msg);
+            this.handleFailureBhNonExist()
           }
           else {
             this.handleFailure();
-            this.alert("无法创建"); // 显示“无法创建”信息
+            alert("无法创建"); // 显示“无法创建”信息
           }
         })
         .catch(error => {
           console.error("提交失败:", error);
-          this.alert("无法创建"); // 显示“无法创建”信息
+          alert("无法创建"); // 显示“无法创建”信息
         });
     },
     handleSuccess () {
@@ -105,6 +105,13 @@ export default {
     },
     handleFailureBhExist () {
       this.$alert('该员工编号已经存在', '提示', {
+        type: 'error',
+        confirmButtonText: '确定',
+        callback: action => {}
+      });
+    },
+    handleFailureBhNonExist () {
+      this.$alert('该员工编号不存在', '提示', {
         type: 'error',
         confirmButtonText: '确定',
         callback: action => {}

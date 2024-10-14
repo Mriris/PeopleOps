@@ -27,6 +27,7 @@
 
     <select id="getYgBybh" resultType="map">
         select
+            yg.id as id,
             yg.bh as bh,
             yg.xm as xm,
             case yg.xb when '1' then  '男' else '女' end as xb,
