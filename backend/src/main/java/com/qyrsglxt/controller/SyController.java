@@ -1,6 +1,7 @@
 package com.qyrsglxt.controller;
 
 import com.qyrsglxt.mapper.SyMapper;
+import com.qyrsglxt.mapper.YgMapper;
 import com.qyrsglxt.util.IdUtil;
 import com.qyrsglxt.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class SyController {
 
     @Autowired
     SyMapper syMapper;
+
+    @Autowired
+    YgMapper ygMapper;
 
     // 根据员工ID获取试用期信息
     // http://127.0.0.1:8083/backend/syDetail?ygid=123456
@@ -70,20 +74,40 @@ public class SyController {
     }
 
     // 新建试用期员工记录
-    // http://127.0.0.1:8083/backend/syBuild?bh=123&zt=1&ksrq=2024-01-01&jsrq=2024-04-01
+    // http://127.0.0.1:8083/backend/syBuild?bh=yg0002&zt=1&ksrq=2024-01-01&jsrq=2024-04-01
     @RequestMapping("/syBuild")
     public Map<String, Object> syBuild(String bh, String zt, String ksrq, String jsrq) {
         System.out.println("前端传来的ygid为" + bh);
         System.out.println("前端传来的zt为" + zt);
         System.out.println("前端传来的ksrq为" + ksrq);
         System.out.println("前端传来的jsrq为" + jsrq);
-        String id = IdUtil.getId();
-        // 向数据库中存入数据
+
+        // 创建一个结果集
         Map<String, Object> map = new HashMap<>();
-        Integer res = syMapper.insertSy(id, bh, zt, ksrq, jsrq);
+
+        // 根据 bh 查询 yg 表，获取对应的 id
+        Map<String, Object> ygInfo = ygMapper.getYgBybh(bh);
+
+        if (ygInfo == null || ygInfo.get("id") == null) {
+            // 如果没有找到对应的员工编号，返回失败消息
+            map.put("res", 0); // 0 表示失败
+            map.put("message", "员工编号不存在");
+            return map;
+        }
+
+        // 获取 yg 表中对应的员工 id
+        String realbh = (String) ygInfo.get("id");
+
+        // 生成新的 ID
+        String id = IdUtil.getId();
+
+        // 向数据库中存入数据
+        Integer res = syMapper.insertSy(id, realbh, zt, ksrq, jsrq);
         map.put("res", res);
+
         return map;
     }
+
 
     // 编辑试用期员工记录
     // http://127.0.0.1:8083/backend/syUpdate?id=123&zt=2&ksrq=2024-01-01&jsrq=2024-04-01

@@ -72,6 +72,8 @@ export default {
           this.handleSuccess();
         } else if (res == -1) {
           this.handleFailureBhExist();
+        }else if (res == 0){
+          this.handleFailureBhNonExist()
         } else {
           this.handleFailure();
         }
@@ -95,6 +97,13 @@ export default {
     },
     handleFailureBhExist () {
       this.$alert('该员工编号已经存在', '提示', {
+        type: 'error',
+        confirmButtonText: '确定',
+        callback: action => {}
+      });
+    },
+    handleFailureBhNonExist () {
+      this.$alert('该员工编号不存在', '提示', {
         type: 'error',
         confirmButtonText: '确定',
         callback: action => {}
