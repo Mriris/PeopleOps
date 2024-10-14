@@ -55,28 +55,37 @@ export default {
       this.detailData = {};
       this.$router.push('/welcome');
     },
-    submit () {
+    submit() {
       // 调用后端接口，把数据提交到后端
       const formData = new FormData();
-      // formData.append('id', this.id);
       formData.append('ygid', this.detailData.ygid);
-      // formData.append('xm', this.detailData.xm);
       formData.append('lzrq', this.detailData.lzrq);
       formData.append('lzlx', this.detailData.lzlx);
+
       console.log(this.detailData.lzrq);
       console.log(this.detailData.lzlx);
-      this.axios.post('/backend/lzInsert', formData).then(response => {
-        // this.detailData = response.data;
-        // 后端接口返回结果
-        let res = response.data.res;
-        if (res == 1) {
-          this.handleSuccess();
-        } else if (res == -1) {
-          this.handleFailureBhExist();
-        } else {
-          this.handleFailure();
-        }
-      });
+
+      this.axios.post('/backend/lzInsert', formData)
+        .then(response => {
+          // 后端接口返回结果
+          let res = response.data.res;
+          let msg = response.data.message;
+          if (res == 1) {
+            this.handleSuccess();
+          } else if (res == -1) {
+            this.handleFailureBhExist();
+          }else if (res == 0){
+            this.alert(msg);
+          }
+          else {
+            this.handleFailure();
+            this.alert("无法创建"); // 显示“无法创建”信息
+          }
+        })
+        .catch(error => {
+          console.error("提交失败:", error);
+          this.alert("无法创建"); // 显示“无法创建”信息
+        });
     },
     handleSuccess () {
       this.$alert('操作成功', '提示', {
