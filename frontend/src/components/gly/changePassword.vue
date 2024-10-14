@@ -72,18 +72,26 @@ export default {
   },
   methods: {
     formSubmit () {
-      this.$refs.adminData.validate((valid) => { // valid表示校验的结果，所有校验都通过时，valid为true
+      this.$refs.adminData.validate((valid) => {
         if (valid) {
           const id = this.$cookie.get('gly_id');
-          // 调用后端接口
-          let res = 1;
-          if (res == 1) {
-            this.handleSuccess(); // 提示操作成功
-          } else if (res == -1) {
-            this.handleFailurePasswordError(); // 提示原密码错误
-          } else {
-            this.handleFailure(); // 提示操作失败
-          }
+          const passwordData = {
+            id: id,
+            ymm: this.adminData.ymm, // 原密码
+            xmm: this.adminData.xmm  // 新密码
+          };
+
+          this.$http.post('/backend/changePassword', passwordData)
+            .then((response) => {
+              const res = response.data;
+              if (res.success) {
+                this.handleSuccess();
+              } else if (res.message === '原密码错误') {
+                this.handleFailurePasswordError();
+              } else {
+                this.handleFailure();
+              }
+            });
         }
       });
     },

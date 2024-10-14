@@ -9,4 +9,17 @@
         WHERE zhm = #{zhm} AND mm = #{mm}
     </select>
 
+    <select id="findByIdAndMm" parameterType="map" resultType="com.qyrsglxt.entity.Admin">
+        SELECT id
+        FROM gly
+        WHERE id = #{id} AND mm = #{mm}
+    </select>
+
+    <!-- 更新管理员密码 -->
+    <update id="updatePasswordById" parameterType="map">
+        UPDATE gly
+        SET mm = #{newPassword}
+        WHERE id = #{id}
+    </update>
+
 </mapper>
