@@ -8,6 +8,17 @@ public class Admin {
     private String mm;
     private String nc;
 
+    public Admin(){
+
+    }
+
+
+    public Admin(String id, String zhm, String mm, String nc) {
+        this.id = id;
+        this.zhm = zhm;
+        this.mm = mm;
+        this.nc = nc;
+    }
     // Getters and Setters
     public String getId() {
         return id;

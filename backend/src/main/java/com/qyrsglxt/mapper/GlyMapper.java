@@ -14,4 +14,10 @@ public interface GlyMapper {
 
     // 更新管理员密码
     int updatePasswordById(@Param("id") String id, @Param("newPassword") String newPassword);
+
+    // 根据账户名查询管理员
+    Admin findByZhm(@Param("zhm") String zhm);
+
+    // 插入新的管理员
+    int insertAdmin(Admin admin);
 }

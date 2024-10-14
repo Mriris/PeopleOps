@@ -13,6 +13,8 @@
           </el-form-item>
         </el-form>
         <el-button type="success" class="loginButton" @click="toLogin">登录</el-button>
+        <br>
+        <el-button type="primary" class="registerButton" @click="toRegister">注册</el-button>
       </el-card>
     </div>
   </div>
@@ -77,6 +79,9 @@ export default {
         }
       });
     },
+    toRegister(){
+      this.$router.push('/register');
+    },
     handleFailure () {
       this.$message({
         type: 'error',
@@ -139,6 +144,12 @@ export default {
     .loginButton {
       width: 35%;
       margin-top: 1%;
+      font-size: 1vw;
+      border-radius: 25px;
+    }
+    .registerButton {
+      width: 35%;
+      margin-top: 5%;
       font-size: 1vw;
       border-radius: 25px;
     }

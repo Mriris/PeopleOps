@@ -2,6 +2,7 @@ package com.qyrsglxt.controller;
 
 import com.qyrsglxt.entity.Admin;
 import com.qyrsglxt.mapper.GlyMapper;
+import com.qyrsglxt.util.IdUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,39 @@ public class GlyController {
             result.put("success", false);
             result.put("message", "账户名或密码错误");
         }
+        return result;
+    }
+
+    // 注册接口
+    @PostMapping("/register")
+    public Map<String, Object> register(@RequestBody Map<String, String> registerData) {
+        String zhm = registerData.get("zhm");
+        String mm = registerData.get("mm");
+        String nc = registerData.get("nc");
+
+        Map<String, Object> result = new HashMap<>();
+
+        // 检查账户名是否已经存在
+        Admin existingAdmin = glyMapper.findByZhm(zhm);
+        if (existingAdmin != null) {
+            result.put("success", false);
+            result.put("message", "账户名已存在");
+            return result;
+        }
+
+        // 生成新的管理员ID
+        String id = IdUtil.getId();
+        Admin newAdmin = new Admin(id, zhm, mm, nc);
+        int insertResult = glyMapper.insertAdmin(newAdmin);
+
+        if (insertResult > 0) {
+            result.put("success", true);
+            result.put("message", "注册成功");
+        } else {
+            result.put("success", false);
+            result.put("message", "注册失败");
+        }
+
         return result;
     }
 
