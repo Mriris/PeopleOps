@@ -1,9 +1,9 @@
 <template>
-  <el-menu class="aside" router :default-active="$route.path" :default-openeds="openeds">
+  <el-menu class="aside" router :default-active="$route.path" :default-openeds="openeds" unique-opened="ture">
     <el-menu-item-group>
       <el-menu-item style="text-align: left;" index="/welcome"><i class="el-icon-s-home"></i>首页</el-menu-item>
     </el-menu-item-group>
-    <el-submenu index="1">
+    <el-submenu index="1" >
       <template slot="title"><i class="el-icon-menu"></i>部门管理</template>
       <el-menu-item-group>
         <el-menu-item index="/bmBuild">新建部门</el-menu-item>

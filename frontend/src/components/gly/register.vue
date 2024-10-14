@@ -2,16 +2,16 @@
   <div class="register">
     <div class="formBox">
       <el-form ref="registerData" label-position="left" label-width="130px" :rules="rules" :model="registerData">
-        <el-form-item label="账户名" prop="zhm">
+        <el-form-item label="账 户 名" prop="zhm">
           <el-input v-model="registerData.zhm"></el-input>
         </el-form-item>
-        <el-form-item label="密 码" prop="mm">
+        <el-form-item label="密　　码" prop="mm">
           <el-input v-model="registerData.mm" type="password"></el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="qrmm">
           <el-input v-model="registerData.qrmm" type="password"></el-input>
         </el-form-item>
-        <el-form-item label="昵 称" prop="nc">
+        <el-form-item label="昵　　称" prop="nc">
           <el-input v-model="registerData.nc"></el-input>
         </el-form-item>
       </el-form>
