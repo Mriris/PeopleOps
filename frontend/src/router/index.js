@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import 'element-ui/lib/theme-chalk/index.css';
 import Router from 'vue-router'
 
 import login from '@/components/gly/login'
@@ -32,7 +33,14 @@ import lzDetail from '@/components/gly/lzDetail'
 import lzBuild from '@/components/gly/lzBuild'
 import lzUpdate from '@/components/gly/lzUpdate'
 
+import glyList from '@/components/gly/glyList'
+import glyDetail from '@/components/gly/glyDetail'
+import glyBuild from '@/components/gly/glyBuild'
+import glyUpdate from '@/components/gly/glyUpdate'
+
 import changePassword from '@/components/gly/changePassword'
+
+
 
 Vue.use(Router);
 
@@ -183,6 +191,30 @@ export default new Router({
           path: '/lzUpdate',
           name: 'lzUpdate',
           component: lzUpdate,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/glyList',
+          name: 'glyList',
+          component: glyList,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/glyDetail',
+          name: 'glyDetail',
+          component: glyDetail,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/glyBuild',
+          name: 'glyBuild',
+          component: glyBuild,
+          meta: { auth: '1' }
+        },
+        {
+          path: '/glyUpdate',
+          name: 'glyUpdate',
+          component: glyUpdate,
           meta: { auth: '1' }
         },
         {

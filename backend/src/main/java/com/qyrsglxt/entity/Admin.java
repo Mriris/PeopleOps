@@ -7,6 +7,7 @@ public class Admin {
     private String zhm;
     private String mm;
     private String nc;
+    private String glylx;
 
     public Admin(){
 
@@ -50,5 +51,13 @@ public class Admin {
 
     public void setNc(String nc) {
         this.nc = nc;
+    }
+
+    public String getGlylx() {
+        return glylx;
+    }
+
+    public void setGlylx(String glylx) {
+        this.glylx = glylx;
     }
 }

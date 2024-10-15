@@ -4,27 +4,29 @@
 
     <!-- 查询管理员，根据账户名和密码 -->
     <select id="findByZhmAndMm" parameterType="map" resultType="com.qyrsglxt.entity.Admin">
-        SELECT id, zhm, mm, nc
+        SELECT id, zhm, mm, nc, glylx
         FROM gly
         WHERE zhm = #{zhm} AND mm = #{mm}
     </select>
 
+    <!-- 查询管理员，根据ID和密码 -->
     <select id="findByIdAndMm" parameterType="map" resultType="com.qyrsglxt.entity.Admin">
-        SELECT id
+        SELECT id, zhm, mm, nc, glylx
         FROM gly
         WHERE id = #{id} AND mm = #{mm}
     </select>
 
+    <!-- 查询管理员，根据账户名 -->
     <select id="findByZhm" parameterType="string" resultType="com.qyrsglxt.entity.Admin">
-        SELECT id, zhm, mm, nc
+        SELECT id, zhm, mm, nc, glylx
         FROM gly
         WHERE zhm = #{zhm}
     </select>
 
     <!-- 插入新的管理员 -->
     <insert id="insertAdmin" parameterType="com.qyrsglxt.entity.Admin">
-        INSERT INTO gly (id, zhm, mm, nc)
-        VALUES (#{id}, #{zhm}, #{mm}, #{nc})
+        INSERT INTO gly (id, zhm, mm, nc, glylx)
+        VALUES (#{id}, #{zhm}, #{mm}, #{nc}, '1')
     </insert>
 
     <!-- 更新管理员密码 -->
@@ -33,5 +35,43 @@
         SET mm = #{newPassword}
         WHERE id = #{id}
     </update>
+
+    <!-- 查询管理员列表（分页） -->
+    <select id="getGlyListPage" parameterType="map" resultType="map">
+        SELECT id, zhm, mm,nc, glylx
+        FROM gly
+                 LIMIT #{start}, #{pageSize}
+    </select>
+
+    <!-- 获取管理员总数 -->
+    <select id="getGlyListTotal" resultType="int">
+        SELECT COUNT(1) FROM gly
+    </select>
+
+    <!-- 根据id查询管理员详细信息 -->
+    <select id="getGlyById" parameterType="string" resultType="map">
+        SELECT gly.id as id,
+               gly.zhm as zhm,
+               gly.mm as mm,
+               gly.nc as nc,
+               case gly.glylx
+                    when '1' then '普通管理员'
+                    when '2' then '超级管理员'
+                    end as glylx
+        FROM gly
+        WHERE id = #{id}
+    </select>
+
+    <!-- 根据id更新管理员 -->
+    <update id="updateGlyById" parameterType="map">
+        UPDATE gly
+        SET zhm = #{zhm}, mm = #{mm}, nc=#{nc}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据id删除管理员 -->
+    <delete id="deleteGlyById" parameterType="string">
+        DELETE FROM gly WHERE id = #{id}
+    </delete>
 
 </mapper>

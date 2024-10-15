@@ -63,9 +63,12 @@ export default {
             .then(response => {
               const data = response.data;
               if (data.success) {
+                console.log("1111111");
                 this.$cookie.set('qx', data.qx);
                 this.$cookie.set('gly_id', data.gly_id);
                 this.$cookie.set('nc', data.nc);
+                this.$cookie.set('glylx', data.glylx);
+                console.log(data);
                 this.$router.push('/welcome');
               } else {
                 this.handleFailure();
