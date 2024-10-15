@@ -14,7 +14,8 @@
         </el-form>
         <el-button type="success" class="loginButton" @click="toLogin">登录</el-button>
         <br>
-        <el-button type="primary" class="registerButton" @click="toRegister">注册</el-button>
+<!--        删除注册按钮-->
+<!--        <el-button type="primary" class="registerButton" @click="toRegister">注册</el-button>-->
       </el-card>
     </div>
   </div>
