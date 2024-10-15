@@ -18,6 +18,8 @@ public interface GwMapper {
     // 通过岗位编号bh查询岗位信息
     public Map<String, Object> getGwByBh(@Param("bh") String bh);
 
+    public Integer getGwTotalByIdAndBh(@Param("id") String id, @Param("bh") String bh);
+
     // 查询全部岗位的数量
     public Integer getGwListTotal();
 

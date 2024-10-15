@@ -28,6 +28,10 @@
         where bh = #{bh}
     </select>
 
+    <select id="getBmTotalByIdAndBh" resultType="int">
+        select count(1) from bm where id!=#{id} and bh=#{bh}
+    </select>
+
     <!-- 获取部门总数 -->
     <select id="getBmListTotal" resultType="int">
         select count(1) from bm

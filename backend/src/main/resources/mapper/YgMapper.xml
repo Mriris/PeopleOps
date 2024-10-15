@@ -25,6 +25,11 @@
         where yg.id=#{id}
     </select>
 
+<!--   查询重复编号值-->
+    <select id="getYgTotalByIdAndBh" resultType="int">
+        select count(1) from yg where id!=#{id} and bh=#{bh}
+    </select>
+
     <select id="getYgBybh" resultType="map">
         select
             yg.id as id,

@@ -99,7 +99,7 @@ export default {
       });
     },
     handleFailureBhExist () {
-      this.$alert('该员工编号已经存在', '提示', {
+      this.$alert('该岗位编号已经存在', '提示', {
         type: 'error',
         confirmButtonText: '确定',
         callback: action => {}

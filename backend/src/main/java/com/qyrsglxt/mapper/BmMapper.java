@@ -23,6 +23,9 @@ public interface BmMapper {
     public List<Map<String, Object>> getBmListPage(
             @Param("start") Integer start, @Param("length") Integer length);
 
+    public Integer getBmTotalByIdAndBh(@Param("id") String id, @Param("bh") String bh);
+
+
     // 插入部门信息
     public Integer insertBm(@Param("id") String id, @Param("bh") String bh,
                             @Param("mc") String mc, @Param("dh") String dh,

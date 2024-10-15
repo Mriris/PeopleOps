@@ -30,6 +30,11 @@ public interface YgMapper {
                             @Param("xm") String xm, @Param("xb") String xb,
                             @Param("csrq") String csrq, @Param("rzrq") String rzrq,
                             @Param("bmid") String bmid, @Param("gwid") String gwid);
+
+    // 通过员工id和编号查询员工的数量
+    public Integer getYgTotalByIdAndBh(@Param("id") String id, @Param("bh") String bh);
+
+
     // 通过员工id查询员工信息，用于员工编辑
     public Map<String, Object> getYgByIdForUpdate(@Param("id") String id);
     public Integer setYgByIdForUpdate(@Param("id") String id,

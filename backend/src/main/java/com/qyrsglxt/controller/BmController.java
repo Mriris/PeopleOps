@@ -86,7 +86,18 @@ public class BmController {
         System.out.println("前端传来的clrq为" + clrq);
         // 向数据库中更新数据
         Map<String, Object> map = new HashMap<>(); // 返回结果
-        Integer res = bmMapper.updateBmById(id, bh, mc, dh, cz, clrq);
+
+        Integer res =0;
+        // 先判断员工编号是否已经存在
+        Integer count = bmMapper.getBmTotalByIdAndBh(id, bh);
+        if (count == 0) { // 如果员工编号不存在
+             res = bmMapper.updateBmById(id, bh, mc, dh, cz, clrq);
+//        Integer res = 1;
+        }
+        else{
+            res = -1;
+        }
+
         map.put("res", res);
         return map;
     }

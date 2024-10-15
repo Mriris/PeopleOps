@@ -90,7 +90,18 @@ public class GwController {
         System.out.println("前端传来的lx为" + gwlx);
         // 向数据库中更新数据
         Map<String, Object> map = new HashMap<>(); // 返回结果
-        Integer res = gwMapper.updateGwById(id, bh, mc, gwlx);
+
+        Integer res =0;
+        // 先判断员工编号是否已经存在
+        Integer count = gwMapper.getGwTotalByIdAndBh(id, bh);
+        if (count == 0) { // 如果员工编号不存在
+             res = gwMapper.updateGwById(id, bh, mc, gwlx);
+//        Integer res = 1;
+        }
+        else{
+            res = -1;
+        }
+
         map.put("res", res);
         return map;
     }

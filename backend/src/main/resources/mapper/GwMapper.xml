@@ -40,6 +40,10 @@
         where gw.bh=#{bh}
     </select>
 
+    <select id="getGwTotalByIdAndBh" resultType="int">
+        select count(1) from gw where id!=#{id} and bh=#{bh}
+    </select>
+
     <!-- 查询岗位记录的总数量 -->
     <select id="getGwListTotal" resultType="int">
         select count(1) from gw
