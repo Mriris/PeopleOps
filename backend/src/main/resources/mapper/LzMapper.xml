@@ -87,6 +87,10 @@
         where id = #{id}
     </update>
 
+    <delete id="deleteLzByYgId">
+        delete from lz where ygid=#{ygid}
+    </delete>
+
     <!-- 删除离职信息 -->
     <delete id="deleteLzById">
         delete from lz where id = #{bh}

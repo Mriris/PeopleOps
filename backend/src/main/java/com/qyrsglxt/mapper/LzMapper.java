@@ -29,6 +29,9 @@ public interface LzMapper {
     // 更新离职信息
     Integer updateLz(@Param("id") String id, @Param("lzrq") String lzrq, @Param("lzlx") String lzlx);
 
+    // 通过员工id删除离职信息
+    public Integer deleteLzByYgId(@Param("ygid") String ygid);
+
     // 删除离职信息
     Integer deleteLzById(@Param("id") String id);
 }

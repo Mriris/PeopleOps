@@ -71,6 +71,10 @@
         where id = #{id}
     </update>
 
+    <delete id="deleteSyByYgId">
+        delete from sy where ygid=#{ygid}
+    </delete>
+
     <!-- 删除试用期信息 -->
     <delete id="deleteSyById">
         delete from sy where id = #{id}

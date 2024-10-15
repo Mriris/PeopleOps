@@ -1,8 +1,11 @@
 package com.qyrsglxt.controller;
 
+import com.qyrsglxt.mapper.LzMapper;
+import com.qyrsglxt.mapper.SyMapper;
 import com.qyrsglxt.mapper.YgMapper;
 import com.qyrsglxt.util.IdUtil;
 import com.qyrsglxt.util.PageUtil;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,10 @@ public class YgController {
 
     @Autowired
     YgMapper ygMapper;
+    @Autowired
+    SyMapper syMapper;
+    @Autowired
+    LzMapper lzMapper;
 
     // 员工详细信息
     // http://127.0.0.1:8083/backend/ygDetail?id=8bfd4bbdaf694cfd994605dd1854cf7b
@@ -152,6 +159,8 @@ public class YgController {
         System.out.println("前端传来的id为" + id);
         // 从数据库中删除数据
         Map<String, Object> map = new HashMap<String, Object>(); // 返回结果
+        lzMapper.deleteLzByYgId(id); // 删除离职信息
+        syMapper.deleteSyByYgId(id); // 删除试用信息
         Integer res = ygMapper.deleteYgById(id);
         map.put("res", res);
         return map;

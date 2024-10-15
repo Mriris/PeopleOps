@@ -33,6 +33,8 @@ public interface SyMapper {
     public Integer updateSyById(@Param("id") String id, @Param("zt") String zt,
                                 @Param("ksrq") String ksrq, @Param("jsrq") String jsrq);
 
+    public Integer deleteSyByYgId(@Param("ygid") String ygid);
+
     // 通过ID删除试用期员工信息
     public Integer deleteSyById(@Param("id") String id);
 }
