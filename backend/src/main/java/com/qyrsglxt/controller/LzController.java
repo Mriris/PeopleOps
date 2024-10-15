@@ -1,6 +1,7 @@
 package com.qyrsglxt.controller;
 
 import com.qyrsglxt.mapper.LzMapper;
+import com.qyrsglxt.mapper.YgMapper;
 import com.qyrsglxt.util.IdUtil;
 import com.qyrsglxt.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class LzController {
 
     @Autowired
     LzMapper lzMapper;
+
+    @Autowired
+    YgMapper ygMapper;
 
     // 通过离职ID获取离职信息
     // http://127.0.0.1:8083/backend/lzDetail?id=04283b3860c94b2596503a484ae34154
@@ -64,14 +68,32 @@ public class LzController {
         return map;
     }
 
+
     // 插入离职信息
-    // http://127.0.0.1:8083/backend/lzInsert?ygid=123&lzrq=2024-05-01&lzlx=1
+    // http://127.0.0.1:8083/backend/lzInsert?ygid=YG0004&lzrq=2024-05-01&lzlx=1
     @RequestMapping("/lzInsert")
     public Map<String, Object> lzInsert(String ygid, String lzrq, String lzlx) {
         System.out.println("前端传来的ygid为" + ygid);
-        String id = IdUtil.getId();
-        Integer res = lzMapper.insertLz(id, ygid, lzrq, lzlx);
+
+        // 通过员工编号获取员工信息
+        Map<String, Object> ygInfo = ygMapper.getYgBybh(ygid);
+
         Map<String, Object> map = new HashMap<>();
+
+        if (ygInfo == null || ygInfo.get("id") == null) {
+            System.out.println(ygInfo);
+            System.out.println('1');
+            map.put("res", 0); // 员工不存在
+            map.put("message", "员工编号不存在");
+            return map;
+        }
+
+        // 获取员工的真实 id
+        String realYgId = (String) ygInfo.get("id");
+
+        String id = IdUtil.getId();
+        Integer res = lzMapper.insertLz(id, realYgId, lzrq, lzlx);
+
         map.put("res", res);
         return map;
     }

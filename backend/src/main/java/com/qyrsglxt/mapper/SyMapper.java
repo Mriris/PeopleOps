@@ -25,7 +25,7 @@ public interface SyMapper {
     public List<Map<String, Object>> getSyListPage(@Param("start") Integer start, @Param("length") Integer length);
 
     // 插入试用期员工信息
-    public Integer insertSy(@Param("id") String id, @Param("ygid") String ygid,
+    public Integer insertSy(@Param("id") String id, @Param("bh") String bh,
                             @Param("zt") String zt, @Param("ksrq") String ksrq,
                             @Param("jsrq") String jsrq);
 

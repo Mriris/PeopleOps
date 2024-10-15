@@ -78,17 +78,25 @@ export default {
       this.$router.push('/welcome');
     },
     submit () {
-      // 调用后端接口，把数据提交到后端
-      // 后端接口返回结果
-
-      // let res = 1;
-      if (res == 1) {
-        this.handleSuccess();
-      } else if (res == -1) {
-        this.handleFailureBhExist();
-      } else {
-        this.handleFailure();
-      }
+      const formData = new FormData();
+      // formData.append('id', this.id);
+      formData.append('bh', this.detailData.bh);
+      formData.append('mc', this.detailData.mc);
+      formData.append('dh', this.detailData.dh);
+      formData.append('cz', this.detailData.cz);
+      formData.append('clrq', this.detailData.clrq);
+      this.axios.post('/backend/bmBuild', formData).then(response => {
+        // this.detailData = response.data;
+        // 后端接口返回结果
+        let res = response.data.res;
+        if (res == 1) {
+          this.handleSuccess();
+        } else if (res == -1) {
+          this.handleFailureBhExist();
+        } else {
+          this.handleFailure();
+        }
+      });
     },
     handleSuccess () {
       this.$alert('操作成功', '提示', {

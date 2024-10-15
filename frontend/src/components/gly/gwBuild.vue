@@ -3,7 +3,7 @@
     <div class="adminTitle">
       <span>新建岗位</span>
       <el-button size="mini" class="buildButton" @click="tableBack">返回</el-button>
-      <el-button size="mini" type="success" class="buildButton" @click="sugwit">提交</el-button>
+      <el-button size="mini" type="success" class="buildButton" @click="submit">提交</el-button>
     </div>
     <div class="detailPage">
       <el-form ref="form" label-position="left" label-width="130px" :model="detailData">
@@ -49,17 +49,24 @@ export default {
       this.detailData = {};
       this.$router.push('/welcome');
     },
-    sugwit () {
-      // 调用后端接口，把数据提交到后端
-      // 后端接口返回结果
-      let res = 1;
-      if (res == 1) {
-        this.handleSuccess();
-      } else if (res == -1) {
-        this.handleFailureBhExist();
-      } else {
-        this.handleFailure();
-      }
+    submit () {
+      const formData = new FormData();
+      // formData.append('id', this.id);
+      formData.append('bh', this.detailData.bh);
+      formData.append('mc', this.detailData.mc);
+      formData.append('gwlx', this.detailData.gwlx);
+      this.axios.post('/backend/gwBuild', formData).then(response => {
+        // this.detailData = response.data;
+        // 后端接口返回结果
+        let res = response.data.res;
+        if (res == 1) {
+          this.handleSuccess();
+        } else if (res == -1) {
+          this.handleFailureBhExist();
+        } else {
+          this.handleFailure();
+        }
+      });
     },
     handleSuccess () {
       this.$alert('操作成功', '提示', {

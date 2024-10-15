@@ -8,10 +8,10 @@
     <div class="detailPage">
       <el-form ref="form" label-position="left" label-width="130px" :model="detailData">
         <el-form-item label="员工编号">
-          <el-input v-model="detailData.bh"></el-input>
+          <el-input v-model="detailData.ygid"></el-input>
         </el-form-item>
         <el-form-item label="离职日期">
-          <el-date-picker v-model="detailData.rzrq" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
+          <el-date-picker v-model="detailData.lzrq" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
         </el-form-item>
         <el-form-item label="离职类型">
           <el-select v-model="detailData.lzlx" placeholder="请选择">
@@ -28,8 +28,8 @@ export default {
   data () {
     return {
       detailData: {
-        bh: '', // 编号
-        rzrq: '', // 入职日期
+        ygid: '', // 编号
+        lzrq: '', // 入职日期
         lzlx: '', // 离职类型
       },
       lzlxList: [{
@@ -47,7 +47,7 @@ export default {
         }, {
           id: '5',
           mc: '试用期未通过'
-        }]      
+        }]
     }
   },
   methods: {
@@ -55,17 +55,37 @@ export default {
       this.detailData = {};
       this.$router.push('/welcome');
     },
-    submit () {
+    submit() {
       // 调用后端接口，把数据提交到后端
-      // 后端接口返回结果
-      let res = 1;
-      if (res == 1) {
-        this.handleSuccess();
-      } else if (res == -1) {
-        this.handleFailureBhExist();
-      } else {
-        this.handleFailure();
-      }
+      const formData = new FormData();
+      formData.append('ygid', this.detailData.ygid);
+      formData.append('lzrq', this.detailData.lzrq);
+      formData.append('lzlx', this.detailData.lzlx);
+
+      console.log(this.detailData.lzrq);
+      console.log(this.detailData.lzlx);
+
+      this.axios.post('/backend/lzInsert', formData)
+        .then(response => {
+          // 后端接口返回结果
+          let res = response.data.res;
+          let msg = response.data.message;
+          if (res == 1) {
+            this.handleSuccess();
+          } else if (res == -1) {
+            this.handleFailureBhExist();
+          }else if (res == 0){
+            this.handleFailureBhNonExist()
+          }
+          else {
+            this.handleFailure();
+            alert("无法创建"); // 显示“无法创建”信息
+          }
+        })
+        .catch(error => {
+          console.error("提交失败:", error);
+          alert("无法创建"); // 显示“无法创建”信息
+        });
     },
     handleSuccess () {
       this.$alert('操作成功', '提示', {
@@ -85,6 +105,13 @@ export default {
     },
     handleFailureBhExist () {
       this.$alert('该员工编号已经存在', '提示', {
+        type: 'error',
+        confirmButtonText: '确定',
+        callback: action => {}
+      });
+    },
+    handleFailureBhNonExist () {
+      this.$alert('该员工编号不存在', '提示', {
         type: 'error',
         confirmButtonText: '确定',
         callback: action => {}

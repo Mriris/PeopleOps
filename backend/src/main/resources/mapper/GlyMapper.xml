@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qyrsglxt.mapper.GlyMapper">
+
+    <!-- 查询管理员，根据账户名和密码 -->
+    <select id="findByZhmAndMm" parameterType="map" resultType="com.qyrsglxt.entity.Admin">
+        SELECT id, zhm, mm, nc
+        FROM gly
+        WHERE zhm = #{zhm} AND mm = #{mm}
+    </select>
+
+    <select id="findByIdAndMm" parameterType="map" resultType="com.qyrsglxt.entity.Admin">
+        SELECT id
+        FROM gly
+        WHERE id = #{id} AND mm = #{mm}
+    </select>
+
+    <select id="findByZhm" parameterType="string" resultType="com.qyrsglxt.entity.Admin">
+        SELECT id, zhm, mm, nc
+        FROM gly
+        WHERE zhm = #{zhm}
+    </select>
+
+    <!-- 插入新的管理员 -->
+    <insert id="insertAdmin" parameterType="com.qyrsglxt.entity.Admin">
+        INSERT INTO gly (id, zhm, mm, nc)
+        VALUES (#{id}, #{zhm}, #{mm}, #{nc})
+    </insert>
+
+    <!-- 更新管理员密码 -->
+    <update id="updatePasswordById" parameterType="map">
+        UPDATE gly
+        SET mm = #{newPassword}
+        WHERE id = #{id}
+    </update>
+
+</mapper>

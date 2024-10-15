@@ -13,6 +13,8 @@
           </el-form-item>
         </el-form>
         <el-button type="success" class="loginButton" @click="toLogin">登录</el-button>
+        <br>
+        <el-button type="primary" class="registerButton" @click="toRegister">注册</el-button>
       </el-card>
     </div>
   </div>
@@ -53,22 +55,32 @@ export default {
     }
   },
   methods: {
-    toLogin () {
-      this.$refs.form.validate((valid) => { // 执行校验，当通过校验时，valid值为true
+    toLogin() {
+      this.$refs.form.validate((valid) => {
         if (valid) {
-          // 调用后端接口
-          if (this.loginData.zhm == 'mua' && this.loginData.mm == '12345678') {
-            // 用户名和密码正确
-            this.$cookie.set('qx', 1); // 权限是1，表示管理员
-            this.$cookie.set('gly_id', '123'); // 管理员id
-            this.$cookie.set('nc', 'summer'); // 昵称
-            this.$router.push('/welcome'); // 转到管理员主页
-          } else {
-            // 用户名或密码错误
-            this.handleFailure();
-          }
+          this.$http.post('/backend/login', this.loginData)
+            .then(response => {
+              const data = response.data;
+              if (data.success) {
+                this.$cookie.set('qx', data.qx);
+                this.$cookie.set('gly_id', data.gly_id);
+                this.$cookie.set('nc', data.nc);
+                this.$router.push('/welcome');
+              } else {
+                this.handleFailure();
+              }
+            })
+            .catch(() => {
+              this.$message({
+                type: 'error',
+                message: '服务器错误'
+              });
+            });
         }
       });
+    },
+    toRegister(){
+      this.$router.push('/register');
     },
     handleFailure () {
       this.$message({
@@ -132,6 +144,12 @@ export default {
     .loginButton {
       width: 35%;
       margin-top: 1%;
+      font-size: 1vw;
+      border-radius: 25px;
+    }
+    .registerButton {
+      width: 35%;
+      margin-top: 5%;
       font-size: 1vw;
       border-radius: 25px;
     }

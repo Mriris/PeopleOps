@@ -27,6 +27,7 @@
 
     <select id="getYgBybh" resultType="map">
         select
+            yg.id as id,
             yg.bh as bh,
             yg.xm as xm,
             case yg.xb when '1' then  '男' else '女' end as xb,
@@ -64,18 +65,7 @@
         insert into yg(id, bh, xm, xb, csrq, rzrq, bmid, gwid, zzzt) values(#{id}, #{bh}, #{xm}, #{xb}, #{csrq}, #{rzrq}, #{bmid}, #{gwid}, '1')
     </insert>
 
-<!--    <select id="getYgByIdForUpdate" resultType="map">-->
-<!--        select-->
-<!--            yg.bh as bh,-->
-<!--            yg.xm as xm,-->
-<!--            yg.xb as xb,-->
-<!--            yg.csrq as csrq,-->
-<!--            yg.rzrq as rzrq,-->
-<!--            yg.bmid as bm,-->
-<!--            yg.gwid as gw-->
-<!--        from yg-->
-<!--        where yg.id=#{id}-->
-<!--    </select>-->
+
     <update id="setYgByIdForUpdate">
         update yg
         set bh=#{bh}, xm=#{xm}, xb=#{xb}, rzrq=#{rzrq},bmid=#{bm},gwid=#{gw}

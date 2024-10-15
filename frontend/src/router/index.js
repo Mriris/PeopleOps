@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import login from '@/components/gly/login'
+import register from '@/components/gly/register'
 
 import home from '@/components/gly/home'
 import welcome from '@/components/gly/welcome'
@@ -46,6 +47,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register
     },
     {
       path: '/home',
