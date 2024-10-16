@@ -20,7 +20,7 @@ public class BmController {
     BmMapper bmMapper;
 
     // 部门详细信息
-    // http://127.0.0.1:8083/backend/bmDetail?id=8bfd4bbdaf694cfd994605dd1854cf7b
+    // http://127.0.0.1:8083/backend/bmDetail?id=4150aa673b2c4c0abd23b337cb01b874
     @RequestMapping("/bmDetail")
     public Map<String, Object> bmDetail(String id) {
         System.out.println("前端传来的id为" + id);

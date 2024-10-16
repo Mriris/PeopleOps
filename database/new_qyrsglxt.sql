@@ -19,20 +19,26 @@ INSERT INTO `bm` VALUES ('4150aa673b2c4c0abd23b337cb01b874','BM04','法务部','
 # Structure for table "gly"
 #
 
-DROP TABLE IF EXISTS `gly`;
-CREATE TABLE `gly` (
-  `id` char(32) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT 'id',
-  `zhm` varchar(20) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '账户名',
-  `mm` varchar(20) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '密码',
-  `nc` varchar(20) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '昵称',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='管理员信息表';
+-- auto-generated definition
+create table gly
+(
+    id    char(32) charset utf8mb3    default '' not null comment 'id'
+        primary key,
+    zhm   varchar(20) charset utf8mb3 default '' not null comment '账户名',
+    mm    varchar(20) charset utf8mb3 default '' not null comment '密码',
+    nc    varchar(20) charset utf8mb3 default '' not null comment '昵称',
+    glylx char(1)  default '1' not null comment '管理员类型，1:普通管理员, 2:超级管理员'
+)
+    comment '管理员信息表' collate = utf8mb3_bin;
 
 #
 # Data for table "gly"
 #
 
-INSERT INTO `gly` VALUES ('0f8ec71d868040d191fa323d5ffe31c0','zhangsan','111111','winter'),('d3844cdb2eb04dce870d2a0b5973b862','admin','123456','summer');
+INSERT INTO `gly` (id, zhm, mm, nc)
+VALUES
+    ('0f8ec71d868040d191fa323d5ffe31c0','zhangsan','111111','winter'),
+    ('d3844cdb2eb04dce870d2a0b5973b862','admin','123456','summer');
 
 #
 # Structure for table "gw"

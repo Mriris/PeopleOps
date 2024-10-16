@@ -70,35 +70,41 @@ public class GlyController {
     // 注册接口
     @PostMapping("/register")
     public Map<String, Object> register(@RequestBody Map<String, String> registerData) {
-        String zhm = registerData.get("zhm");
-        String mm = registerData.get("mm");
-        String nc = registerData.get("nc");
-
         Map<String, Object> result = new HashMap<>();
+        try {
+            String zhm = registerData.get("zhm");
+            String mm = registerData.get("mm");
+            String nc = registerData.get("nc");
 
-        // 检查账户名是否已经存在
-        Admin existingAdmin = glyMapper.findByZhm(zhm);
-        if (existingAdmin != null) {
+            // 检查账户名是否已经存在
+            Admin existingAdmin = glyMapper.findByZhm(zhm);
+            if (existingAdmin != null) {
+                result.put("success", false);
+                result.put("message", "账户名已存在");
+                return result;
+            }
+
+            // 生成新的ID
+            String id = IdUtil.getId();
+            Admin newAdmin = new Admin(id, zhm, mm, nc);
+            int insertResult = glyMapper.insertAdmin(newAdmin);
+
+            if (insertResult > 0) {
+                result.put("success", true);
+                result.put("message", "注册成功");
+            } else {
+                result.put("success", false);
+                result.put("message", "注册失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // 打印异常堆栈
             result.put("success", false);
-            result.put("message", "账户名已存在");
-            return result;
-        }
-
-        // 生成新的管理员ID
-        String id = IdUtil.getId();
-        Admin newAdmin = new Admin(id, zhm, mm, nc);
-        int insertResult = glyMapper.insertAdmin(newAdmin);
-
-        if (insertResult > 0) {
-            result.put("success", true);
-            result.put("message", "注册成功");
-        } else {
-            result.put("success", false);
-            result.put("message", "注册失败");
+            result.put("message", "服务器内部错误：" + e.getMessage());
         }
 
         return result;
     }
+
 
     @PostMapping("/changePassword")
     public Map<String, Object> changePassword(@RequestBody Map<String, String> passwordData) {
