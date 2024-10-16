@@ -38,9 +38,9 @@ create table gly
 
 INSERT INTO `gly` (id, zhm, mm, nc)
 VALUES
-    ('0f8ec71d868040d191fa323d5ffe31c0','zhangsan','111111','winter'),
-    ('af8ec71d868040d191fa323d5ffe31c1','mua','12345678','iris'),
-    ('d3844cdb2eb04dce870d2a0b5973b862','admin','123456','summer');
+    ('0f8ec71d868040d191fa323d5ffe31c0','zhangsan','111111','winter','1'),
+    ('af8ec71d868040d191fa323d5ffe31c1','mua','12345678','iris','1'),
+    ('d3844cdb2eb04dce870d2a0b5973b862','superadmin','123456','summer','2');
 
 #
 # Structure for table "gw"
