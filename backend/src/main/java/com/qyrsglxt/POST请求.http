@@ -1,0 +1,30 @@
+# 注册
+POST http://127.0.0.1:8083/backend/register
+Content-Type: application/json
+
+{
+  "zhm": "mua",
+  "mm": "12345678",
+  "nc": "iris"
+}
+
+###
+#登录
+POST http://localhost:8083/backend/login
+Content-Type: application/json
+
+{
+  "zhm": "mua2",
+  "mm": "12345678"
+}
+
+###
+#修改密码
+POST http://localhost:8083/backend/changePassword
+Content-Type: application/json
+
+{
+  "id": "4668fea5aff849b2bfee01ca5d35f149",
+  "ymm": "12345678",
+  "xmm": "123456"
+}
