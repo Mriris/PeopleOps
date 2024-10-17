@@ -23,7 +23,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name: 'glyUpdate',
@@ -73,19 +72,30 @@ export default {
       this.$router.push({ name: 'glyDetail', params: { id: this.id } }); // 跳转到管理员详细页面
     },
     submit() {
-      const formData = {
-        id: this.id,  // 使用当前的管理员ID
-        zhm: this.registerData.zhm,
-        mm: this.registerData.mm,
-        nc: this.registerData.nc
-      };
+      // 调用表单校验
+      this.$refs.registerData.validate((valid) => {
+        if (valid) {
+          const formData = {
+            id: this.id,  // 使用当前的管理员ID
+            zhm: this.registerData.zhm,
+            mm: this.registerData.mm,
+            nc: this.registerData.nc
+          };
 
-      this.axios.post('/backend/glyUpdate', formData).then(response => {
-        let res = response.data.success;
-        if (res) {
-          this.handleSuccess();
+          this.axios.post('/backend/glyUpdate', formData).then(response => {
+            let res = response.data.success;
+            if (res) {
+              this.handleSuccess();
+            } else {
+              this.handleFailure();
+            }
+          });
         } else {
-          this.handleFailure();
+          // 如果校验失败
+          this.$alert('请检查输入是否正确', '提示', {
+            type: 'error',
+            confirmButtonText: '确定'
+          });
         }
       });
     },
