@@ -57,7 +57,7 @@ export default {
       this.$router.push('/gwList');
     },
     handleDelete () {
-      this.$confirm('此操作将删除该部门, 是否继续?', '提示', {
+      this.$confirm('此操作将删除该岗位, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
